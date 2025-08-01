@@ -351,8 +351,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnPrefab: {fileID: 8369623345759276926, guid: 7edba08cdfdce9f4ea13bbdc1534f8f8, type: 3}
-  segmentSpacing: 0.2
-  curveStrength: 10
+  segmentSpacing: 0.25
+  curveStrength: 0.05
+  wiggleFrequency: 3
+  yOffset: 0.3
 --- !u!1 &1206357089
 GameObject:
   m_ObjectHideFlags: 0
