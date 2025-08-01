@@ -333,6 +333,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxFollowDist: 5
+  minFollowDist: 1
   dashSpeed: 20
   dashSpeedCurve:
     serializedVersion: 2
@@ -572,10 +573,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e897e1143657a41dba6f2ea519798373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -30
-  minY: -30
-  maxX: 30
-  maxY: 20
+  minX: -20
+  minY: -15
+  maxX: 20
+  maxY: 15
   target: {fileID: 724348768}
   cameraOffset: {x: 0, y: 0, z: 0}
   followSpeed: 10

@@ -3,18 +3,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //basic movement
-    public float movementSpeed;
-    public float turnSpeed;
+    public float movementSpeed = 6f;
+    public float turnSpeed = 4f;
     public AnimationCurve followCurve;
-    public float maxFollowDist;
+    public float maxFollowDist = 5f;
+    public float minFollowDist = 1f;
     private float followDist;
     private bool facingRight = false;
     private Vector2 movementVector = Vector2.zero;
 
     //dash
-    public float dashSpeed;
+    public float dashSpeed = 20;
     public AnimationCurve dashSpeedCurve;
-    public float maxDashTime;
+    public float maxDashTime = 0.2f;
     private bool dashing = false;
     private Vector2 dashDirection = Vector2.zero;
     private float dashTime = 0f;
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         followDist = Mathf.Min(mouseDist.magnitude, maxFollowDist);
+        if (followDist < minFollowDist) followDist = 0;
         float t = Time.deltaTime;
         movementVector = Vector2.Lerp(movementVector, newMovementVector, t*turnSpeed);
 
