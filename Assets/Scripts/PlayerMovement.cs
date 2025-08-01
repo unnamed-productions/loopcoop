@@ -1,65 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    public float minMovementDist;
+    //basic movement
     public float movementSpeed;
+    public float turnSpeed;
+    public AnimationCurve followCurve;
+    public float maxFollowDist;
+    private float followDist;
+    private bool facingRight = false;
+    private Vector2 movementVector = Vector2.zero;
+
+    //dash
     public float dashSpeed;
     public AnimationCurve dashSpeedCurve;
     public float maxDashTime;
-
     private bool dashing = false;
-
     private Vector2 dashDirection = Vector2.zero;
-    private bool facingRight = false;
     private float dashTime = 0f;
+
+
+    //components
+    private Rigidbody2D body;
+
+    void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
+
 
     void Update()
     {
-
-        float deltaTime = Time.deltaTime;
-        
+    
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         Vector2 playerWorldPoint = (Vector2)transform.position;
-        Vector2 movementVector = mouseWorldPoint - playerWorldPoint;
-        facingRight = movementVector.x > 0;
+        Vector2 mouseDist = mouseWorldPoint - playerWorldPoint;
+        Vector2 newMovementVector = mouseDist.normalized;
 
-        //handle all dash logic
-        if (dashing)
-        {
-
-            dashTime -= deltaTime;
-            if (dashTime < 0f)
-            {
-                dashing = false;
-            }
-
-            float t = 1f - (dashTime / maxDashTime);
-            float currDashSpeed = dashSpeed * dashSpeedCurve.Evaluate(t);
-            transform.Translate(currDashSpeed * dashDirection);
-
-        }
-        //handle normal movement logic
-        else if (movementVector.magnitude > minMovementDist)
-        {
-            transform.Translate(movementVector.normalized * movementSpeed);
-        }
-
-        if (Input.GetMouseButtonDown(0) && !dashing && movementVector.magnitude > minMovementDist) {
-    
+        if (Input.GetMouseButtonDown(0) && !dashing) {
             dashing = true;
             dashTime = maxDashTime;
-            dashDirection = movementVector.normalized;
-          
-            
+            dashDirection = newMovementVector;
         }
 
-        //temp: flip scale 
+        followDist = Mathf.Min(mouseDist.magnitude, maxFollowDist);
+        float t = Time.deltaTime;
+        movementVector = Vector2.Lerp(movementVector, newMovementVector, t*turnSpeed);
+
+        facingRight = movementVector.x > 0;
         float scalar = Mathf.Sign(facingRight ? -1f : 1f) * Mathf.Abs(transform.localScale.x);
-        transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);  
+        transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);
+    }
+
+    void FixedUpdate(){
+        
+        if (dashing) {
+            dashTime -= Time.fixedDeltaTime;
+            if (dashTime <= 0f) dashing = false;
+            else
+            {
+                float t = 1f - (dashTime / maxDashTime);
+                float currDashSpeed = dashSpeed * dashSpeedCurve.Evaluate(t);
+                body.velocity = currDashSpeed * dashDirection;
+                return;
+            }
+        }
+
+        float followMult = followCurve.Evaluate(followDist / maxFollowDist);
+        body.velocity = movementVector * movementSpeed * followMult;
     }
 }
