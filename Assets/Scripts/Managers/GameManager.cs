@@ -3,17 +3,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject gameOverScreen;
 
     public enum GameState
     {
         MAIN_MENU,
         PAUSED,
-        PLAYING
+        PLAYING,
+        GAME_OVER,
+
     }
 
     public GameState currentGameState;
 
     public int score;
+    public int health;
 
     [SerializeField]
     private TopDownPlayer player;
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.PLAYING;
         score = 0;
+        health = 100; 
     }
 
     public void TogglePause()
@@ -39,6 +44,21 @@ public class GameManager : MonoBehaviour
         {
             currentGameState = GameState.PLAYING;
         }
+    }
+
+    public void ToggleGameOver()
+    {
+        currentGameState = GameState.GAME_OVER;
+        gameOverScreen.SetActive(true);
+    }
+
+    public void ToggleRestart()
+    {
+        currentGameState = GameState.PLAYING;
+        gameOverScreen.SetActive(false);
+        score = 0;
+        health = 100; 
+        player.ResetPlayer(); 
     }
 
     public TopDownPlayer GetPlayer()
