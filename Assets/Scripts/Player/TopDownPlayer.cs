@@ -112,7 +112,6 @@ public class TopDownPlayer : MonoBehaviour
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
             if(stunTime > 0) Stun(stunTime);
             MakeInvulnerable(stunTime * 2);
-            myHUD.SetHearts(curHealth);
         }
     }
 
