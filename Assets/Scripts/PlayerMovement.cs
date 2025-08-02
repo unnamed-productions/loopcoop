@@ -29,17 +29,28 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
+    public Vector2 getMoveDirection()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Vector2 playerWorldPoint = (Vector2)transform.position;
+        Vector2 mouseDist = mouseWorldPoint - playerWorldPoint;
+        Vector2 newMovementVector = mouseDist.normalized;
+        return newMovementVector;
+    }
+
 
     void Update()
     {
-    
+
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         Vector2 playerWorldPoint = (Vector2)transform.position;
         Vector2 mouseDist = mouseWorldPoint - playerWorldPoint;
         Vector2 newMovementVector = mouseDist.normalized;
 
-        if (Input.GetMouseButtonDown(0) && !dashing) {
+        if (Input.GetMouseButtonDown(0) && !dashing)
+        {
             dashing = true;
             dashTime = maxDashTime;
             dashDirection = newMovementVector;
@@ -48,16 +59,18 @@ public class PlayerMovement : MonoBehaviour
         followDist = Mathf.Min(mouseDist.magnitude, maxFollowDist);
         if (followDist < minFollowDist) followDist = 0;
         float t = Time.deltaTime;
-        movementVector = Vector2.Lerp(movementVector, newMovementVector, t*turnSpeed);
+        movementVector = Vector2.Lerp(movementVector, newMovementVector, t * turnSpeed);
 
         facingRight = movementVector.x > 0;
         float scalar = Mathf.Sign(facingRight ? -1f : 1f) * Mathf.Abs(transform.localScale.x);
         transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);
     }
 
-    void FixedUpdate(){
-        
-        if (dashing) {
+    void FixedUpdate()
+    {
+
+        if (dashing)
+        {
             dashTime -= Time.fixedDeltaTime;
             if (dashTime <= 0f) dashing = false;
             else
