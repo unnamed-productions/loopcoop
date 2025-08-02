@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentGameState = GameState.MAIN_MENU;
+        instance = this;
     }
 
     public void StartGame()
