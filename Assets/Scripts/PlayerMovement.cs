@@ -38,10 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     //components
     private Rigidbody2D body;
+    private SpriteRenderer sprite;
 
      void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         dashCounter.enabled = false;
     }
 
@@ -105,13 +107,11 @@ public class PlayerMovement : MonoBehaviour
 
         movementVector = Vector2.Lerp(movementVector, newMovementVector, Time.deltaTime * turnSpeed);
 
-        facingRight = movementVector.x > 0;
-        float flip = facingRight ? 1f : -1f;
-        transform.localScale = new Vector3(
-            flip * Mathf.Abs(transform.localScale.x),
-            transform.localScale.y,
-            transform.localScale.z
-        );
+        if (movementVector.x != 0)
+        {
+            facingRight = movementVector.x > 0;
+            sprite.flipX = !facingRight;
+        }
     }
 
     void FixedUpdate()
