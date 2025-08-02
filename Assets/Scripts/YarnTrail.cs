@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class YarnTrail : MonoBehaviour
 {
-    [SerializeField] GameObject yarnPrefab;
-    [SerializeField] float segmentSpacing = 0.25f;
-    [SerializeField] float curveStrength = 0.05f;
-    [SerializeField] float wiggleFrequency = 3f;
-    [SerializeField] float yOffset = 0.3f;
+    [Header("Yarn Settings")]
+    [SerializeField] private GameObject yarnPrefab;
+    [SerializeField] private float segmentSpacing = 0.25f;
+    [SerializeField] private float curveStrength = 0.05f;
+    [SerializeField] private float wiggleFrequency = 3f;
+    [SerializeField] private float yOffset = 0.3f;
 
+    [Header("Loop Settings")]
+    [SerializeField] private float loopCloseThreshold = 0.5f;
+    [SerializeField] private int minSegmentsForLoop = 8;
 
-    private List<Vector3> trailPoints = new List<Vector3>();
+    private List<Vector3> trailPoints = new();
+    private List<GameObject> yarnSegments = new();
     private Vector3 lastSpawnPos;
 
     void Start()
@@ -21,39 +26,86 @@ public class YarnTrail : MonoBehaviour
 
     void Update()
     {
-        Vector3 currentPos = transform.position;
-        float distance = Vector3.Distance(lastSpawnPos, currentPos);
+        UpdateYarnTrail();
+        TryCloseLoop();
+    }
 
-        while (distance >= segmentSpacing)
+    void UpdateYarnTrail()
+    {
+        Vector3 currentPos = transform.position;
+        float dist = Vector3.Distance(lastSpawnPos, currentPos);
+
+        while (dist >= segmentSpacing)
         {
-            // interpolate points
-            Vector3 direction = (currentPos - lastSpawnPos).normalized;
-            Vector3 nextPos = lastSpawnPos + direction * segmentSpacing;
+            Vector3 dir = (currentPos - lastSpawnPos).normalized;
+            Vector3 nextPos = lastSpawnPos + dir * segmentSpacing;
 
             DropSegment(lastSpawnPos, nextPos);
             lastSpawnPos = nextPos;
-            distance = Vector3.Distance(lastSpawnPos, currentPos);
+            dist = Vector3.Distance(lastSpawnPos, currentPos);
         }
-
     }
 
     void DropSegment(Vector3 from, Vector3 to)
     {
-        //slight offset to curve yarn
+        trailPoints.Add(to);
+
         Vector3 dir = (to - from).normalized;
         Vector3 normal = Vector3.Cross(dir, Vector3.forward).normalized;
+        float wiggle = Mathf.Sin(Time.time * wiggleFrequency + trailPoints.Count) * curveStrength;
 
-        float offsetAmount = Mathf.Sin(Time.time * wiggleFrequency + trailPoints.Count) * curveStrength;
-        Vector3 midPoint = Vector3.Lerp(from, to, 0.5f) + normal * offsetAmount;
+        //vertical offset
+        Vector3 mid = Vector3.Lerp(from, to, 0.5f) + normal * wiggle;
+        Vector3 spawnAt = mid + Vector3.up * yOffset;
 
-        Vector3 upwardOffset = Vector3.up * yOffset;
-        Vector3 spawnPos = midPoint + upwardOffset;
+        //rotate to face movement direction
+        var seg = Instantiate(yarnPrefab, spawnAt, Quaternion.identity);
+        yarnSegments.Add(seg);
 
-        GameObject seg = Instantiate(yarnPrefab, spawnPos, Quaternion.identity);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+        seg.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
 
-        // rotate to face direction from last point to current
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        seg.transform.rotation = Quaternion.Euler(0, 0, angle + 90f);
+    void TryCloseLoop()
+    {
+        int count = trailPoints.Count;
+        if (count < minSegmentsForLoop + 2) return;
 
+        Vector3 lastPoint = trailPoints[^1];
+        int loopStart = -1;
+        int searchLimit = count - 1 - minSegmentsForLoop;
+
+        // scan all older points beyond the “recent” ones
+        for (int i = 0; i <= searchLimit; i++)
+        {
+            if (Vector3.Distance(trailPoints[i], lastPoint) <= loopCloseThreshold)
+            {
+                loopStart = i;
+                break;
+            }
+        }
+
+        if (loopStart < 0) return;
+
+        Debug.Log($"Loop detected at segment #{loopStart}. Clearing entire trail.");
+
+        ClearTrail();
+    }
+
+
+    void ClearTrail()
+    {
+        // destroy visuals
+        foreach (var seg in yarnSegments)
+            Destroy(seg);
+        yarnSegments.Clear();
+
+        // reset for new trail
+        trailPoints.Clear();
+        Vector3 p = transform.position;
+        trailPoints.Add(p);
+        lastSpawnPos = p;
+
+        Debug.Log("Trail reset. Ready for next loop.");
     }
 }
