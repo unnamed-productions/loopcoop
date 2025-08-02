@@ -355,6 +355,8 @@ MonoBehaviour:
   curveStrength: 0.05
   wiggleFrequency: 3
   yOffset: 0.3
+  loopCloseThreshold: 0.5
+  minSegmentsForLoop: 8
 --- !u!1 &1102462594
 GameObject:
   m_ObjectHideFlags: 0

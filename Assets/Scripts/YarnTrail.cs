@@ -62,7 +62,7 @@ public class YarnTrail : MonoBehaviour
         var seg = Instantiate(yarnPrefab, spawnAt, Quaternion.identity);
         yarnSegments.Add(seg);
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         seg.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 

@@ -29,6 +29,16 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
     }
 
+    public Vector2 getMoveDirection()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Vector2 playerWorldPoint = (Vector2)transform.position;
+        Vector2 mouseDist = mouseWorldPoint - playerWorldPoint;
+        Vector2 newMovementVector = mouseDist.normalized;
+        return newMovementVector;
+    }
+
 
     void Update()
     {
