@@ -19,17 +19,18 @@ public class PlayerMovement : MonoBehaviour
     //dash
     public float dashSpeed = 20;
     public AnimationCurve dashSpeedCurve;
-    public float dashTime = 0.5f;
+
     private bool dashing = false;
     private Vector2 dashDirection = Vector2.zero;
     [SerializeField] private float dashTimer = 0f;
+    [SerializeField] private float dashTime = 0.5f;
+    [SerializeField] private float chainTime = 0.5f;
+    [SerializeField] private float timeSinceDashEnd = Mathf.Infinity;
 
-    //chain dash
-    public Vector2 chainDashTriggerInterval = new(0.75f, 1.0f);  
+
 
     //dash cooldown
-    public float failedDashCooldownTime = 2;
-    [SerializeField] private float failedDashCooldownTimer;
+    [SerializeField] public float failedDashCooldownTime = 2;
 
     //dash UI 
     public TextMeshProUGUI dashCounter;
@@ -39,68 +40,60 @@ public class PlayerMovement : MonoBehaviour
     //components
     private Rigidbody2D body;
     private SpriteRenderer sprite;
+    private Animator animator;
 
-     void Start()
+    void Start()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         dashCounter.enabled = false;
+        animator = GetComponent<Animator>();
     }
 
     void StartDash(Vector2 direction)
     {
         dashing = true;
+        dashCount ++;
         dashTimer = dashTime;
+        timeSinceDashEnd = Mathf.Infinity;
         dashDirection = direction;
-        dashCount++;
-
-        dashCounter.text = dashCount.ToString();
-        dashCounter.enabled = true;
 
     }
 
-    void StopDash()
+   void StopDash()
     {
         dashing = false;
         dashTimer = 0f;
-        failedDashCooldownTimer = failedDashCooldownTime;
-
+        timeSinceDashEnd = 0f; // Start chain window
         body.velocity = Vector2.zero;
 
-        dashCount = 0;
-        dashCounter.enabled = false;
     }
 
     void Update()
     {
+        if (dashing || timeSinceDashEnd < chainTime)  {
+            dashCounter.text = dashCount.ToString();
+            dashCounter.enabled = true;
+        } else dashCounter.enabled = false;
+       
 
         Vector2 mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 toMouse = mouseWorldPoint - (Vector2)transform.position;
         Vector2 newMovementVector = toMouse.normalized;
 
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetKeyDown(KeyCode.Space) && !dashing)
         {
-            float dashProgress = 1f - (dashTimer / dashTime);
+            bool canChain = timeSinceDashEnd < chainTime;
+            bool canStartNew = timeSinceDashEnd > failedDashCooldownTime;
 
-            if (dashing)
+            if (canChain || canStartNew)
             {
-                bool canChain = dashProgress >= chainDashTriggerInterval.x && dashProgress <= chainDashTriggerInterval.y;
-
-                if (canChain)
-                {
-                    StartDash(newMovementVector);
-                }
-                else
-                {
-                    StopDash();
-                }
-            }
-            else if (failedDashCooldownTimer <= 0)
-            {
+                if (!canChain) dashCount = 0;
                 StartDash(newMovementVector);
             }
         }
-
+    
 
         followDist = Mathf.Min(toMouse.magnitude, maxFollowDist);
         if (followDist < minFollowDist) followDist = 0;
@@ -115,30 +108,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        if (dashing)
-        {
-            dashTimer -= Time.fixedDeltaTime;
+{
+    if (dashTimer < 0)
+        StopDash();
 
-            if (dashTimer <= 0f)
-            {
-                StopDash();
-            }
-            else
-            {
-                float t = 1f - (dashTimer / dashTime);
-                float speed = dashSpeed * dashSpeedCurve.Evaluate(t);
-                body.velocity = speed * dashDirection;
-            }
-        }
-        else
-        {
-            failedDashCooldownTimer -= Time.fixedDeltaTime;
-
-            float followT = followDist / maxFollowDist;
-            float followMult = followCurve.Evaluate(followT);
-
-            body.velocity = movementVector * movementSpeed * followMult;
-        }
+    if (!dashing) {
+        timeSinceDashEnd += Time.fixedDeltaTime;
+        float followT = followDist / maxFollowDist;
+        float followMult = followCurve.Evaluate(followT);
+        body.velocity = followMult * movementSpeed * movementVector;
     }
+    else {
+        dashTimer -= Time.fixedDeltaTime;
+        float t = 1f - (dashTimer / dashTime);
+        float speed = dashSpeed * dashSpeedCurve.Evaluate(t);
+        body.velocity = speed * dashDirection;   
+    }
+
+    animator.SetFloat("speed", Mathf.Abs(body.velocity.magnitude));
+}
 }
