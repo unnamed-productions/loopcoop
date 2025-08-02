@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cbb0ef88ab36a4d99f5fd1201e90fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnPrefab: {fileID: 0}
+  yarnPrefab: {fileID: 8369623345759276926, guid: 7edba08cdfdce9f4ea13bbdc1534f8f8, type: 3}
   segmentSpacing: 0.25
   curveStrength: 0.05
   wiggleFrequency: 3
