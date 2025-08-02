@@ -14,53 +14,100 @@ public class PlayerMovement : MonoBehaviour
     private bool dashing = false;
 
     private Vector2 dashDirection = Vector2.zero;
-    private bool facingRight = false;
-    private float dashTime = 0f;
+    [SerializeField] private float dashTimer = 0f;
+
+    //chain dash
+    public Vector2 chainDashTriggerInterval = new(0.75f, 1.0f);
+
+    //dash cooldown
+    public float failedDashCooldownTime = 2;
+    [SerializeField] private float failedDashCooldownTimer;
+
+    //dash UI 
+    public TextMeshProUGUI dashCounter;
+    private int dashCount = 0;
+
+
+    //components
+    private Rigidbody2D body;
+    private SpriteRenderer sprite;
+
+    void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        dashCounter.enabled = false;
+    }
+
+    void StartDash(Vector2 direction)
+    {
+        dashing = true;
+        dashTimer = dashTime;
+        dashDirection = direction;
+        dashCount++;
+
+        dashCounter.text = dashCount.ToString();
+        dashCounter.enabled = true;
+
+    }
+
+    void StopDash()
+    {
+        dashing = false;
+        dashTimer = 0f;
+        failedDashCooldownTimer = failedDashCooldownTime;
+
+        body.velocity = Vector2.zero;
+
+        dashCount = 0;
+        dashCounter.enabled = false;
+    }
 
     void Update()
     {
 
         float deltaTime = Time.deltaTime;
 
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        Vector2 playerWorldPoint = (Vector2)transform.position;
-        Vector2 movementVector = mouseWorldPoint - playerWorldPoint;
-        facingRight = movementVector.x > 0;
+        if (movementVector.x != 0)
+        {
+            facingRight = movementVector.x > 0;
+            sprite.flipX = !facingRight;
+        }
+    }
 
         //handle all dash logic
         if (dashing)
         {
 
             dashTime -= deltaTime;
-            if (dashTime < 0f)
+            if (dashTime< 0f)
             {
                 dashing = false;
             }
 
-            float t = 1f - (dashTime / maxDashTime);
-            float currDashSpeed = dashSpeed * dashSpeedCurve.Evaluate(t);
-            transform.Translate(currDashSpeed * dashDirection);
+float t = 1f - (dashTime / maxDashTime);
+float currDashSpeed = dashSpeed * dashSpeedCurve.Evaluate(t);
+transform.Translate(currDashSpeed * dashDirection);
 
         }
         //handle normal movement logic
         else if (movementVector.magnitude > minMovementDist)
-        {
-            transform.Translate(movementVector.normalized * movementSpeed);
-        }
+{
+    transform.Translate(movementVector.normalized * movementSpeed);
+}
 
-        if (Input.GetMouseButtonDown(0) && !dashing && movementVector.magnitude > minMovementDist)
-        {
+if (Input.GetMouseButtonDown(0) && !dashing && movementVector.magnitude > minMovementDist)
+{
 
-            dashing = true;
-            dashTime = maxDashTime;
-            dashDirection = movementVector.normalized;
+    dashing = true;
+    dashTime = maxDashTime;
+    dashDirection = movementVector.normalized;
 
 
-        }
+}
 
-        //temp: flip scale 
-        float scalar = Mathf.Sign(facingRight ? -1f : 1f) * Mathf.Abs(transform.localScale.x);
-        transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);
+//temp: flip scale 
+float scalar = Mathf.Sign(facingRight ? -1f : 1f) * Mathf.Abs(transform.localScale.x);
+transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);
     }
 }

@@ -113,10 +113,10 @@ TextureImporter:
       name: Cat Running_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 254
-        height: 209
+        x: 33
+        y: 3
+        width: 148
+        height: 201
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Cat Running_1
       rect:
         serializedVersion: 2
-        x: 254
-        y: 0
-        width: 254
-        height: 209
+        x: 292
+        y: 1
+        width: 149
+        height: 191
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: Cat Running_2
       rect:
         serializedVersion: 2
-        x: 508
-        y: 0
-        width: 254
-        height: 209
+        x: 543
+        y: 3
+        width: 148
+        height: 201
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: Cat Running_3
       rect:
         serializedVersion: 2
-        x: 762
-        y: 0
-        width: 254
-        height: 209
+        x: 802
+        y: 3
+        width: 149
+        height: 189
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
