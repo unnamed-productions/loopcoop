@@ -15,7 +15,6 @@ public class CameraShake : MonoBehaviour
 
     public void ShakeCamera(float duration, float mgnitude)
     {
-        print("Should be shaking with dur " + duration + " and mag " + mgnitude);
         if (enabled)
         {
             StartCoroutine(Shake(duration, mgnitude));
@@ -29,7 +28,6 @@ public class CameraShake : MonoBehaviour
 
         float elapsed = 0.0f;
         GetComponent<CameraFollow>().enabled = false;
-        print("Should be shaking with dur " + duration + " and mag " + mgnitude);
 
         while (elapsed < duration)
         {
@@ -46,7 +44,6 @@ public class CameraShake : MonoBehaviour
         }
 
         transform.localPosition = GetNeutralPos();
-        print("Should be unshaking");
         GetComponent<CameraFollow>().enabled = true;
     }
 
@@ -57,21 +54,18 @@ public class CameraShake : MonoBehaviour
         magnitude = mgnitude;
         wasShaking = true;
         GetComponent<CameraFollow>().enabled = false;
-        print("Should be shaking");
     }
     public void setShakingFalse()
     {
         isShaking = false;
         magnitude = 0;
         GetComponent<CameraFollow>().enabled = true;
-        print("Should be unshaking");
     }
 
     private void Update()
     {
         if (isShaking)
         {
-            print("Shaking");
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
@@ -81,7 +75,6 @@ public class CameraShake : MonoBehaviour
         }
         else if (wasShaking)
         {
-            print("NotShaking");
             wasShaking = false;
             transform.localPosition = GetNeutralPos();
         }

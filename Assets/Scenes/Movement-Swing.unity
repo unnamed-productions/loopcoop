@@ -153,6 +153,21 @@ MonoBehaviour:
   camShake: {fileID: 1206357096}
   cameraShakeDur: 0.25
   cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 197589400}
+        m_TargetAssemblyTypeName: YarnBallHittable, Assembly-CSharp
+        m_MethodName: SampleEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &197589401
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -302,6 +317,21 @@ MonoBehaviour:
   camShake: {fileID: 1206357096}
   cameraShakeDur: 0.25
   cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 201877822}
+        m_TargetAssemblyTypeName: YarnBallHittable, Assembly-CSharp
+        m_MethodName: SampleEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &201877823
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -891,6 +921,21 @@ MonoBehaviour:
   camShake: {fileID: 1206357096}
   cameraShakeDur: 0.25
   cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 751685784}
+        m_TargetAssemblyTypeName: YarnBallHittable, Assembly-CSharp
+        m_MethodName: SampleEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &757015610
 PrefabInstance:
   m_ObjectHideFlags: 0

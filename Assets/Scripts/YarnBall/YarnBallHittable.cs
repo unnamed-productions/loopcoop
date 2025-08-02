@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class YarnBallHittable : MonoBehaviour
 {
@@ -11,14 +12,21 @@ public class YarnBallHittable : MonoBehaviour
     [SerializeField]
     float cameraShakeIntensity;
 
+    [SerializeField] public UnityEvent onHit;
+
     public void hitMe(float intensity)
     {
-        print("Should be shaking");
         camShake.ShakeCamera(cameraShakeDur, intensity);
+        onHit.Invoke();
     }
 
     public void hitMe()
     {
         hitMe(cameraShakeIntensity);
+    }
+
+    public void SampleEvent()
+    {
+        print("My name is " + gameObject.name + "\nOuuughhh");
     }
 }

@@ -83,7 +83,7 @@ public class YarnBall : MonoBehaviour
 
         // Apply tangential force to the ball
         rb.AddForce(tangent * force, ForceMode2D.Force);
-        print("Velocity: " + rb.velocity.magnitude);
+        //print("Velocity: " + rb.velocity.magnitude);
     }
 
     private void init()
@@ -128,19 +128,19 @@ public class YarnBall : MonoBehaviour
         if (!Smacking)
         {
             //First smack
-            print("Velocity mag " + rb.velocity.magnitude);
+            //print("Velocity mag " + rb.velocity.magnitude);
             currSmacksRemaining = (int)((rb.velocity.magnitude - VelocityThreshold) / VelocityStepSize);
-            print(currSmacksRemaining);
+            print("Initiated hit, can hit " + currSmacksRemaining + " extra targets");
             if (currSmacksRemaining >= 1)
             {
-                print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
+                //print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
                 hit.hitMe(VelocityToShakeMult * VelocitychainMult * rb.velocity.magnitude);
                 Smacking = true;
                 currPiercingSeconds = PiercingSeconds;
             }
             else
             {
-                print("Hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude);
+                //print("Hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude);
                 hit.hitMe(VelocityToShakeMult * rb.velocity.magnitude);
                 Dissolve();
             }
@@ -150,7 +150,7 @@ public class YarnBall : MonoBehaviour
             if (currSmacksRemaining >= 1)
             {
                 //TODO: Accumulate points
-                print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
+                //print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
                 hit.hitMe(VelocityToShakeMult * (float)Mathf.Pow(VelocitychainMult, currChainSmacks) * rb.velocity.magnitude);
                 currChainSmacks++;
                 currSmacksRemaining--;
