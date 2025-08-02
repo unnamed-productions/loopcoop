@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
         PAUSED,
         PLAYING,
         GAME_OVER,
+        TUTORIAL,
 
     }
 
@@ -32,6 +33,25 @@ public class GameManager : MonoBehaviour
         currentGameState = GameState.PLAYING;
         score = 0;
         health = 100; 
+    }
+
+    public void StartTutorial()
+    {
+        currentGameState = GameState.TUTORIAL;
+        score = 0;
+        health = 100; 
+    }
+
+    public void ToggleTutorialOver()
+    {
+        if (currentGameState == GameState.TUTORIAL)
+        {
+            currentGameState = GameState.PLAYING;
+        }
+        else
+        {
+            currentGameState = GameState.TUTORIAL;
+        }
     }
 
     public void TogglePause()
