@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6770506491128653444}
   - component: {fileID: 2877208279145177296}
   - component: {fileID: 8273379411466604146}
-  - component: {fileID: 5701546211780129250}
   - component: {fileID: 323022083270452662}
   - component: {fileID: 4570869110112068818}
   m_Layer: 0
@@ -135,6 +134,12 @@ MonoBehaviour:
   baseTorque: 0.6
   boostMultiplier: 3
   linkPrefab: {fileID: 3862796845642001756, guid: 6caf016d0e36c495eb5e14ae89d77df4, type: 3}
+  maxChainLinks: 20
+  VelocityThreshold: 20
+  VelocityStepSize: 3
+  VelocityToShakeMult: 0.04
+  VelocitychainMult: 1.2
+  PiercingSeconds: 1
 --- !u!58 &8273379411466604146
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,21 +176,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.10237992, y: 0}
   m_Radius: 3.910329
---- !u!114 &5701546211780129250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289707386569547950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 924ff9e5c7f8043c48b8a5d46a0de8e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joint: {fileID: 323022083270452662}
-  segmentPrefab: {fileID: 5149084626505369839, guid: 9fb19c2d1c87346ba9bad27aa9cb3b9b, type: 3}
-  segmentSpacing: 0.2
 --- !u!232 &323022083270452662
 DistanceJoint2D:
   m_ObjectHideFlags: 0

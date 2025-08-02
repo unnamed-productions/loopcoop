@@ -20,6 +20,9 @@ public class YarnBall : MonoBehaviour
 
     private List<GameObject> children; //Rope segments
 
+    [SerializeField]
+    int maxChainLinks = 20;
+
     [Header("Smashing")]
     [SerializeField]
     //If velocity is greater than this number, initiate a "piercing" hit
@@ -92,7 +95,7 @@ public class YarnBall : MonoBehaviour
         playerRb = playr.GetComponent<Rigidbody2D>();
         float distToPlayer = Vector2.Distance(transform.position, playr.transform.position);
         int numSegments = (int)(distToPlayer * 1 / linkPrefab.GetComponent<DistanceJoint2D>().distance); //Round to nearest whole number
-        numSegments = Math.Clamp(numSegments, 1, 30); //Make sure we have at least one segment but not a crazy amount
+        numSegments = Math.Clamp(numSegments, 1, maxChainLinks); //Make sure we have at least one segment but not a crazy amount
 
         GameObject currSegment = gameObject;
         for (int i = 0; i < numSegments; i++)
