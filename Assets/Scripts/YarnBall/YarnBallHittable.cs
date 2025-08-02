@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class YarnBallHittable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    CameraShake camShake;
+    [SerializeField]
+    float cameraShakeDur;
+    [SerializeField]
+    float cameraShakeIntensity;
+
+    public void hitMe(float intensity)
     {
-        
+        print("Should be shaking");
+        camShake.ShakeCamera(cameraShakeDur, intensity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void hitMe()
     {
-        
+        hitMe(cameraShakeIntensity);
     }
 }

@@ -10,19 +10,15 @@ public class CameraShake : MonoBehaviour
     private float magnitude;
     private bool wasShaking = false; //Used to reset after we are done
 
-    private Vector3 originalCameraOffset;
     [SerializeField]
     GameObject player;
 
-    private void Start()
+    public void ShakeCamera(float duration, float mgnitude)
     {
-        originalCameraOffset = transform.localPosition;
-    }
-
-    public void ShakeCamera(float duration, float magnitude)
-    {
-        if (enabled) {
-            StartCoroutine(Shake(duration, magnitude));
+        print("Should be shaking with dur " + duration + " and mag " + mgnitude);
+        if (enabled)
+        {
+            StartCoroutine(Shake(duration, mgnitude));
         }
     }
 
@@ -32,6 +28,8 @@ public class CameraShake : MonoBehaviour
         //print("Camera local position " + originalPos);
 
         float elapsed = 0.0f;
+        GetComponent<CameraFollow>().enabled = false;
+        print("Should be shaking with dur " + duration + " and mag " + mgnitude);
 
         while (elapsed < duration)
         {
@@ -48,6 +46,8 @@ public class CameraShake : MonoBehaviour
         }
 
         transform.localPosition = GetNeutralPos();
+        print("Should be unshaking");
+        GetComponent<CameraFollow>().enabled = true;
     }
 
     public void setShakingTrue(float mgnitude)
@@ -56,17 +56,22 @@ public class CameraShake : MonoBehaviour
         isShaking = true;
         magnitude = mgnitude;
         wasShaking = true;
+        GetComponent<CameraFollow>().enabled = false;
+        print("Should be shaking");
     }
     public void setShakingFalse()
     {
         isShaking = false;
         magnitude = 0;
+        GetComponent<CameraFollow>().enabled = true;
+        print("Should be unshaking");
     }
 
     private void Update()
     {
         if (isShaking)
         {
+            print("Shaking");
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
@@ -76,12 +81,14 @@ public class CameraShake : MonoBehaviour
         }
         else if (wasShaking)
         {
+            print("NotShaking");
             wasShaking = false;
             transform.localPosition = GetNeutralPos();
         }
     }
 
-    private Vector3 GetNeutralPos() {
-        return originalCameraOffset;
+    private Vector3 GetNeutralPos()
+    {
+        return GetComponent<CameraFollow>().getPos();
     }
 }

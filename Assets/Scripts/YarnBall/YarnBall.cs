@@ -18,10 +18,50 @@ public class YarnBall : MonoBehaviour
 
     bool hasHit = false;
 
+    private List<GameObject> children; //Rope segments
+
+    [Header("Smashing")]
+    [SerializeField]
+    //If velocity is greater than this number, initiate a "piercing" hit
+    float VelocityThreshold = 20;
+    //Decide how many hits to chain by dividing the difference between our velocity and the threshold by this number
+    [SerializeField]
+    float VelocityStepSize = 3;
+    //Multiply velocity by this number to get camera shake intensity
+    [SerializeField]
+    float VelocityToShakeMult = .01f;
+    //Multiple the camera shake by this number for every consecutive "piercing" hit
+    [SerializeField]
+    float VelocitychainMult = 1.2f;
+    [SerializeField]
+    //The max amount of time between piercing hits
+    float PiercingSeconds = 1f;
+    private float currPiercingSeconds = 0;
+    private bool Smacking;
+    private int currSmacksRemaining;
+    private int currChainSmacks = 1; //The number of targets hit in this chain
+
+
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        children = new List<GameObject>();
         init();
+    }
+
+    void Update()
+    {
+        if (Smacking)
+        {
+            currPiercingSeconds -= Time.deltaTime;
+            if (currPiercingSeconds <= 0)
+            {
+                Dissolve();
+            }
+        }
+
     }
 
     void FixedUpdate()
@@ -31,7 +71,6 @@ public class YarnBall : MonoBehaviour
         Vector2 toBall = rb.position - playerRb.position;
         Vector2 tangent = new Vector2(-toBall.y, toBall.x).normalized; // Perpendicular (right-hand rule)
 
-        print("tangent is " + tangent);
         // Get how much the player is moving along the tangent
         float alignment = Vector2.Dot(playerRb.gameObject.GetComponent<PlayerMovement>().getMoveDirection(), tangent);
 
@@ -41,10 +80,10 @@ public class YarnBall : MonoBehaviour
         {
             force *= Mathf.Lerp(1f, boostMultiplier, alignment); // smoothly boost
         }
-        print("force is " + force);
 
         // Apply tangential force to the ball
         rb.AddForce(tangent * force, ForceMode2D.Force);
+        print("Velocity: " + rb.velocity.magnitude);
     }
 
     private void init()
@@ -59,6 +98,7 @@ public class YarnBall : MonoBehaviour
         for (int i = 0; i < numSegments; i++)
         {
             GameObject temp = Instantiate(linkPrefab, transform.position, quaternion.identity);
+            children.Add(temp);
             currSegment.GetComponent<DistanceJoint2D>().connectedBody = temp.GetComponent<Rigidbody2D>();
             currSegment = temp;
         }
@@ -83,13 +123,66 @@ public class YarnBall : MonoBehaviour
         }
     }
 
-    void OnDestroy()
+    public void Smack(YarnBallHittable hit)
     {
-        playerRb.gameObject.GetComponent<DistanceJoint2D>().enabled = false; //Free player
+        if (!Smacking)
+        {
+            //First smack
+            print("Velocity mag " + rb.velocity.magnitude);
+            currSmacksRemaining = (int)((rb.velocity.magnitude - VelocityThreshold) / VelocityStepSize);
+            print(currSmacksRemaining);
+            if (currSmacksRemaining >= 1)
+            {
+                print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
+                hit.hitMe(VelocityToShakeMult * VelocitychainMult * rb.velocity.magnitude);
+                Smacking = true;
+                currPiercingSeconds = PiercingSeconds;
+            }
+            else
+            {
+                print("Hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude);
+                hit.hitMe(VelocityToShakeMult * rb.velocity.magnitude);
+                Dissolve();
+            }
+        }
+        else
+        {
+            if (currSmacksRemaining >= 1)
+            {
+                //TODO: Accumulate points
+                print("Chain hitting with intensity " + VelocityToShakeMult * rb.velocity.magnitude * (float)Mathf.Pow(VelocitychainMult, currChainSmacks));
+                hit.hitMe(VelocityToShakeMult * (float)Mathf.Pow(VelocitychainMult, currChainSmacks) * rb.velocity.magnitude);
+                currChainSmacks++;
+                currSmacksRemaining--;
+                if (currSmacksRemaining == 0)
+                {
+                    Dissolve();
+                }
+            }
+            //Subsequent Smacks
+            currPiercingSeconds = PiercingSeconds; //Refresh timer
+
+        }
+
     }
 
-    public void Smack()
+    private void Dissolve()
     {
+        //TODO
+        //Play animation, add points, make particles, kinda do whatever
+        playerRb.gameObject.GetComponent<DistanceJoint2D>().enabled = false; //Free player
+        foreach (GameObject g in children)
+        {
+            Destroy(g);
+        }
+        Destroy(gameObject);
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<YarnBallHittable>())
+        {
+            Smack(collision.gameObject.GetComponent<YarnBallHittable>());
+        }
     }
 }
