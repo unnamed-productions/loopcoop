@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyChicken : MonoBehaviour
+public class EnemyProjectileBehaviour : MonoBehaviour
 {
     [SerializeField]
     EnemyBehaviour enemyState;
@@ -44,18 +44,6 @@ public class EnemyChicken : MonoBehaviour
                 break;
             case EnemyBehaviour.EnemyState.CAPTURED:
                 break;
-        }
-    }
-
-    public void PursuePlayer()
-    {
-        if (rb.velocity.magnitude > enemyState.maxSpeed)
-        {
-            rb.velocity -= rb.velocity.normalized * enemyState.deceleration;
-        }
-        else
-        {
-            enemyState.MoveTowardsPlayer();
         }
     }
 
