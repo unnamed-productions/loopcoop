@@ -5581,7 +5581,7 @@ MonoBehaviour:
   - {fileID: 2911466362553368697, guid: 865bf7b64f8e349fba901325d600b976, type: 3}
   - {fileID: 4203037775174607652, guid: a35e3fa20720948dc97ee78fdf48edf3, type: 3}
   - {fileID: 2369945892883289200, guid: 83f884cbf7265431989841e0e2b45e27, type: 3}
-  enemyWeights: 040000000500000002000000
+  enemyWeights: 050000000300000002000000
 --- !u!4 &1467417674
 Transform:
   m_ObjectHideFlags: 0
