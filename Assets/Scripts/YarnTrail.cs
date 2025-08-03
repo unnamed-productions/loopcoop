@@ -77,7 +77,7 @@ public class YarnTrail : MonoBehaviour
         int loopStart = -1;
         int searchLimit = count - 1 - minSegmentsForLoop;
 
-        // scan all older points beyond the “recent” ones
+        // scan all older points beyond the "recent" ones
         for (int i = 0; i <= searchLimit; i++)
         {
             if (Vector3.Distance(trailPoints[i], lastPoint) <= loopCloseThreshold)
@@ -119,6 +119,29 @@ public class YarnTrail : MonoBehaviour
         lastSpawnPos = p;
 
         Debug.Log("Trail reset. Ready for next loop.");
+    }
+
+    public void ClearTrailFrom(int index)
+    {
+        for (int i = 0; i < index+1; i++)
+        {
+            Destroy(yarnSegments[i]);
+        }
+        yarnSegments.RemoveRange(0, index+1);
+        trailPoints.RemoveRange(0, index+1);
+
+        if (trailPoints.Count == 0)
+        {
+            Vector3 p = transform.position;
+            trailPoints.Add(p);
+        }
+
+        lastSpawnPos = trailPoints[trailPoints.Count - 1];
+    }
+
+    public List<GameObject> GetYarnSegments()
+    {
+        return yarnSegments;
     }
 
     bool IsPointInPolygon(Vector2 point, List<Vector2> poly)
