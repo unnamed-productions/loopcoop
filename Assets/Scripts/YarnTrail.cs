@@ -182,8 +182,11 @@ public class YarnTrail : MonoBehaviour
             }
         }
 
-        Instantiate(yarnSpawnerPrefab, GetMidpoint(loopPolygon),
+        if (loopedEnemyCount > 0)
+        {
+            Instantiate(yarnSpawnerPrefab, GetMidpoint(loopPolygon),
             Quaternion.identity).GetComponent<YarnBallSpawner>().setSnared(snared);
+        }
 
         Debug.Log($"Enemies looped: {loopedEnemyCount}");
     }

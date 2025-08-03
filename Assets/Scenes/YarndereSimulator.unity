@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGameState: 0
   score: 0
+  health: 0
   player: {fileID: 621487727}
 --- !u!4 &661067853
 Transform:
@@ -5580,7 +5581,7 @@ MonoBehaviour:
   - {fileID: 2911466362553368697, guid: 865bf7b64f8e349fba901325d600b976, type: 3}
   - {fileID: 4203037775174607652, guid: a35e3fa20720948dc97ee78fdf48edf3, type: 3}
   - {fileID: 2369945892883289200, guid: 83f884cbf7265431989841e0e2b45e27, type: 3}
-  enemyWeights: 000000000500000000000000
+  enemyWeights: 040000000500000002000000
 --- !u!4 &1467417674
 Transform:
   m_ObjectHideFlags: 0
@@ -7588,6 +7589,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 675181716843623042, guid: db90757abda3f6f449d158cc12ef0d42, type: 3}
+      propertyPath: yarnSpawnerPrefab
+      value: 
+      objectReference: {fileID: 9085868988431645525, guid: be85205867b58404494e6a85dc19e370, type: 3}
     - target: {fileID: 4012333787037562300, guid: db90757abda3f6f449d158cc12ef0d42, type: 3}
       propertyPath: m_Name
       value: Player

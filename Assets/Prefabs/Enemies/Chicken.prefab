@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6498114896740871008}
   m_Layer: 0
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
     loop: 0
     useProximity: 0
   enemyDeathAnimation: {fileID: 0}
+  waypointDistance: 3
   deadSprite: {fileID: 21300000, guid: e1c06be5e67914a90a0c5741d631b320, type: 3}
   points: 250
 --- !u!114 &-3816735101032803601
@@ -245,7 +246,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyState: {fileID: -8454103000983131514}
-  rb: {fileID: 0}
+  attackRange: 5
+  rangeTolerance: 0.2
+  attackMoveSpeed: 2
+  attackCooldown: 5
+  projectilePrefab: {fileID: 0}
+  projectileSpreadDeg: 5
   projectile: {fileID: 4554657737592413410, guid: 9a2f51a43510a47de94ffdca8952a8e5, type: 3}
   projectileSpreadDegrees: 10
 --- !u!114 &268220319528208335
