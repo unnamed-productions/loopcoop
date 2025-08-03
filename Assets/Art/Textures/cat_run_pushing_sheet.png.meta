@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4ecba8110055469da4d4d29fc38da5c
+guid: 9ffb414c55e6142069efc5ce7ab8a181
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_0
+      name: cat_run_pushing_sheet 1_0
       rect:
         serializedVersion: 2
-        x: 205
-        y: 1149
-        width: 588
-        height: 772
+        x: 280
+        y: 1574
+        width: 804
+        height: 1052
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94c6661f1be9a4c44b533518882c09ec
-      internalID: -1457267576
+      spriteID: 6259261a3fe0d4d76b092ee0378bc468
+      internalID: 1038756848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_1
+      name: cat_run_pushing_sheet 1_1
       rect:
         serializedVersion: 2
-        x: 1229
-        y: 1203
-        width: 588
-        height: 746
+        x: 1680
+        y: 1645
+        width: 804
+        height: 1020
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6561f3e7207840b3b6aaf4b9c31340a
-      internalID: 81716712
+      spriteID: b68d9af1d26c2428aa2209e653538fb6
+      internalID: -1939359867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_2
+      name: cat_run_pushing_sheet 1_2
       rect:
         serializedVersion: 2
-        x: 2237
-        y: 1217
-        width: 528
-        height: 748
+        x: 3078
+        y: 1685
+        width: 801
+        height: 1018
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4afc8ed409e7748c5a5a6b85153d1463
-      internalID: 1851198412
+      spriteID: c65e40728372c4b2e96a87a268147e6f
+      internalID: 327961956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_3
+      name: cat_run_pushing_sheet 1_3
       rect:
         serializedVersion: 2
-        x: 3277
-        y: 1203
-        width: 588
-        height: 746
+        x: 4480
+        y: 1645
+        width: 804
+        height: 1020
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 076ab6e88a9c64cbb85b3c3eb04cd6ff
-      internalID: 848855964
+      spriteID: 5f4d3cd85c8044d09bcdb1d91d652cc9
+      internalID: 1013256488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_4
+      name: cat_run_pushing_sheet 1_4
       rect:
         serializedVersion: 2
-        x: 219
-        y: 125
-        width: 594
-        height: 766
+        x: 299
+        y: 174
+        width: 813
+        height: 1044
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8efb07486fe49488c92039c242183b8b
-      internalID: -1660055722
+      spriteID: 167812ee935de41ec9f3e9c1b174a909
+      internalID: -881302301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_5
+      name: cat_run_pushing_sheet 1_5
       rect:
         serializedVersion: 2
-        x: 1231
-        y: 181
-        width: 580
-        height: 744
+        x: 1683
+        y: 247
+        width: 793
+        height: 1018
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdae5387645b44cb4b953c61fbc240fe
-      internalID: 1871965250
+      spriteID: 05786dbecce414a4a949e1213b2a10ad
+      internalID: 459895437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_6
+      name: cat_run_pushing_sheet 1_6
       rect:
         serializedVersion: 2
-        x: 2287
-        y: 193
-        width: 590
-        height: 746
+        x: 3110
+        y: 237
+        width: 810
+        height: 1058
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f60117bfd321c4044bdd584a3902e082
-      internalID: 1707225625
+      spriteID: e1013ceaba61440f88832f34ea5f3a04
+      internalID: 121659491
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_run_pushing_sheet_7
+      name: cat_run_pushing_sheet 1_7
       rect:
         serializedVersion: 2
-        x: 3279
-        y: 181
-        width: 580
-        height: 744
+        x: 4483
+        y: 247
+        width: 793
+        height: 1018
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7684779c93f9140889de520802df6788
-      internalID: 196002362
+      spriteID: bf091882ae8b64ecdaa9b930a434c7c5
+      internalID: -537954170
       vertices: []
       indices: 
       edges: []
@@ -280,7 +280,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 06194c294034640b2b81d7452b61413d
+    spriteID: 7429869ab3c4d414297fa702b048635e
     internalID: 0
     vertices: []
     indices: 
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cat_run_pushing_sheet_0: -1457267576
-      cat_run_pushing_sheet_1: 81716712
-      cat_run_pushing_sheet_2: 1851198412
-      cat_run_pushing_sheet_3: 848855964
-      cat_run_pushing_sheet_4: -1660055722
-      cat_run_pushing_sheet_5: 1871965250
-      cat_run_pushing_sheet_6: 1707225625
-      cat_run_pushing_sheet_7: 196002362
+      cat_run_pushing_sheet 1_0: 1038756848
+      cat_run_pushing_sheet 1_1: -1939359867
+      cat_run_pushing_sheet 1_2: 327961956
+      cat_run_pushing_sheet 1_3: 1013256488
+      cat_run_pushing_sheet 1_4: -881302301
+      cat_run_pushing_sheet 1_5: 459895437
+      cat_run_pushing_sheet 1_6: 121659491
+      cat_run_pushing_sheet 1_7: -537954170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
