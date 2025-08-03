@@ -82,18 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (playerState.IsStunned())
-        {
-            return;
-        }
-        if (dashing || timeSinceDashEnd < chainTime)
-        {
-            dashCounter.text = dashCount.ToString();
-            dashCounter.enabled = true;
-        }
-        else dashCounter.enabled = false;
-
-
         Vector2 mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 toMouse = mouseWorldPoint - (Vector2)transform.position;
         Vector2 newMovementVector = toMouse.normalized;
