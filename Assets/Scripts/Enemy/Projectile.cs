@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     private Vector2 direction;
     Rigidbody2D rb;
-    
+
     const float FIREBALL_SPEED = 8f;
 
     [SerializeField]
@@ -29,18 +29,24 @@ public class Projectile : MonoBehaviour
     Vector2 startPosition;
 
     Transform owner;
+
+    [SerializeField]
+    List<Sprite> possibleSprites;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = rb.position;
+        int rand = Random.Range(0, possibleSprites.Count);
+        GetComponent<SpriteRenderer>().sprite = possibleSprites[rand];
     }
 
     public void Initialize(Vector2 dirn, int damage, Transform owner)
     {
         direction = new Vector2(dirn.x, dirn.y);
         float angle = Mathf.Atan2(dirn.y, dirn.x) * Mathf.Rad2Deg;
-        if(shouldFlip && Mathf.Abs(angle) > 90){
+        if (shouldFlip && Mathf.Abs(angle) > 90)
+        {
             sprite.flipY = true;
         }
         Debug.Log("Angle:" + angle);
@@ -79,6 +85,6 @@ public class Projectile : MonoBehaviour
         // TODO: if it hits yarn, just destroy it
 
         // Destroy(gameObject);
-        
+
     }
 }

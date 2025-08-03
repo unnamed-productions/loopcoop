@@ -61,6 +61,14 @@ public class EnemyBehaviour : MonoBehaviour
         // anim = GetComponent<Animator>();
         // TODO: start in neutral, walk towards player when within range
         currentState = EnemyState.NEUTRAL;
+        if (rb.velocity.x > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     // Update is called once per frame
@@ -123,7 +131,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Capture()
     {
-        if(previousState != EnemyState.STUNNED) previousState = currentState;
+        if (previousState != EnemyState.STUNNED) previousState = currentState;
         currentState = EnemyState.CAPTURED;
 
         // TODO lasso swing setup logic
