@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(false);
         score = 0;
         health = 100; 
-        player.ResetPlayer(); 
     }
 
     public TopDownPlayer GetPlayer()
