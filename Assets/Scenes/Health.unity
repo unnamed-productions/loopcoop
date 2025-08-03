@@ -4657,7 +4657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c7cc1700c544a3a9f179b3d31357f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDisplacement: 5
+  maxDisplacement: 1
   jitterInterval: 0.01
 --- !u!1001 &1210952556
 PrefabInstance:

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public string currentMainScene = "Health";
 
+    public int lastScore = 0;
+
     public enum GameState
     {
         MAIN_MENU,
@@ -23,14 +25,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject pauseScreen;
 
-    public int score;
 
     [SerializeField]
     public TextMeshProUGUI scoreText;
 
     [SerializeField]
     public TextMeshProUGUI multText;
-    int gameScore = 0;
+    public int gameScore = 0;
     float gameMult = 1;
     private float ogJitter;
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.PLAYING;
         SceneManager.LoadScene(currentMainScene);
-        score = 0;
+        gameScore = 0;
     }
 
     public void TogglePause()
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
         {
             currentGameState = GameState.PLAYING;
             pauseScreen.SetActive(false);
+            lastScore = gameScore;
+            gameScore = 0;
         }
     }
 
@@ -72,7 +75,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(currentMainScene);
         currentGameState = GameState.PLAYING;
-        score = 0;
+        lastScore = 0;
+        gameScore = 0;
     }
 
     public void ToggleBackToMainMenu()
@@ -95,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void AddMult(float multToAdd)
     {
-        gameMult *= (1 + multToAdd);
+        gameMult *= 1 + multToAdd;
         multText.text = "Multiplier: " + gameMult;
         multText.GetComponent<Jitter>().maxDisplacement = ogJitter * gameMult;
 

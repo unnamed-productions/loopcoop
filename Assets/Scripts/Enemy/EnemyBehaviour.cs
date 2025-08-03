@@ -221,7 +221,7 @@ public class EnemyBehaviour : MonoBehaviour
         curHealth -= damage;
         if (curHealth <= 0)
         {
-            GameManager.instance.score += 1;
+            GameManager.instance.gameScore += 1;
 
             // TODO: decrement enemy count
             // TODO: play death animation
