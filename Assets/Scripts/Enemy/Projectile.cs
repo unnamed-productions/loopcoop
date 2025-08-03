@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour
         // if collision is player, call function to deal damage
         if (other.gameObject.name == "Player")
         {
-            TopDownPlayer player = other.gameObject.GetComponent<TopDownPlayer>();
+            PlayerMovement player = other.gameObject.GetComponent<PlayerMovement>();
             // player.Hit(damage, 0.2f, direction.normalized * knockbackForce);
             Destroy(gameObject);
         }

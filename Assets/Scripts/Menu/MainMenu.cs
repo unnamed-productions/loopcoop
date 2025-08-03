@@ -10,7 +10,6 @@ public class MainMenu : MonoBehaviour
     {
         //AudioManager.instance.PlaySound(buttonPressSound, transform);
         GameManager.instance.StartGame();
-        SceneManager.LoadScene("Movement");
     }
 
     public void OpenSettings()
@@ -27,7 +26,7 @@ public class MainMenu : MonoBehaviour
         }
         else if (GameManager.instance.currentGameState == GameManager.GameState.MAIN_MENU)
         {
-            SceneManager.LoadScene("Main Menu");
+            GameManager.instance.ToggleBackToMainMenu();
         }
     }
 
@@ -38,7 +37,7 @@ public class MainMenu : MonoBehaviour
 
     public void CloseTutorial ()
     {
-        SceneManager.LoadScene("Main Menu");
+        GameManager.instance.ToggleBackToMainMenu();
     }
 
     public void QuitGame()
