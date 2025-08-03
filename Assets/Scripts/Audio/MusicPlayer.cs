@@ -11,9 +11,10 @@ public class MusicPlayer : MonoBehaviour
     Sound s;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (a) {
+            AudioManager.instance.StopMusic();
             AudioManager.instance.PlayMusic(a);
         }
         if (s.clip) {

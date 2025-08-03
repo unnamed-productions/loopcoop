@@ -33,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float failedDashCooldownTime = 2;
 
 
+    [SerializeField]
+    Sound dashSound;
+
 
 
     //components
@@ -57,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         timeSinceDashEnd = Mathf.Infinity;
         dashDirection = direction;
         animator.SetTrigger("startDash");
+        AudioManager.instance.PlaySound(dashSound, transform);
 
     }
 
