@@ -77,7 +77,7 @@ public class YarnTrail : MonoBehaviour
         int loopStart = -1;
         int searchLimit = count - 1 - minSegmentsForLoop;
 
-        // scan all older points beyond the �recent� ones
+        // scan all older points beyond the "recent" ones
         for (int i = 0; i <= searchLimit; i++)
         {
             if (Vector3.Distance(trailPoints[i], lastPoint) <= loopCloseThreshold)
@@ -143,7 +143,7 @@ public class YarnTrail : MonoBehaviour
     {
         return yarnSegments;
     }
-    
+
     bool IsPointInPolygon(Vector2 point, List<Vector2> poly)
     {
         int crossings = 0;
