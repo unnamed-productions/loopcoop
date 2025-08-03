@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
         AudioManager.instance.StopMusic();
         AudioManager.instance.PlaySound(buttonPressSound, transform);
         GameManager.instance.StartGame();
+        
     }
 
     public void OpenSettings()
