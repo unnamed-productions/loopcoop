@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d61f0414ecf54c1c84852429eb75126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4012333787037562300, guid: db90757abda3f6f449d158cc12ef0d42, type: 3}
   movementSpeed: 3
   yarnDigestionTime: 0.5
 --- !u!50 &4270386884186611291

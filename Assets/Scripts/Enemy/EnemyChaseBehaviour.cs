@@ -39,7 +39,7 @@ public class EnemyChaseBehaviour : MonoBehaviour
         }
         else
         {
-            enemyState.MoveTowardsPlayer();
+            enemyState.MoveTowardsPlayerOffset();
         }
     }
 }

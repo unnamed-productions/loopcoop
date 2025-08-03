@@ -245,7 +245,7 @@ MonoBehaviour:
   enemyState: {fileID: -8454103000983131514}
   rb: {fileID: 0}
   projectile: {fileID: 4554657737592413410, guid: 9a2f51a43510a47de94ffdca8952a8e5, type: 3}
-  projectileSpreadDegrees: 30
+  projectileSpreadDegrees: 10
 --- !u!114 &268220319528208335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleWalkSpeed: 0.4
   enemyState: {fileID: -8454103000983131514}
+  biasedTowardsPlayer: 0
 --- !u!95 &6498114896740871008
 Animator:
   serializedVersion: 7

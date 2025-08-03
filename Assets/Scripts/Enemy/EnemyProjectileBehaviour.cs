@@ -4,59 +4,63 @@ using UnityEngine;
 
 public class EnemyProjectileBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    EnemyBehaviour enemyState;
+    [Header("References")]
+    [SerializeField] private EnemyBehaviour enemyState;
+    private Rigidbody2D rb;
 
-    [SerializeField]
-    readonly float attackRange = 5f;
-
-    [SerializeField]
-    readonly float attackCooldown = 2f;
-    public Rigidbody2D rb;
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 5f;
+    [Tooltip("How close to attackRange before we consider ourselves 'in range'")]
+    [SerializeField] private float rangeTolerance = 0.2f;
+    [SerializeField] private float attackMoveSpeed = 2f;
+    [SerializeField] private float attackCooldown = 5f;
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private float projectileSpreadDeg = 5f;
 
     [SerializeField]
     Projectile projectile;
 
-    bool projectileEnabled = true;
-
     [SerializeField]
     float projectileSpreadDegrees = 5f;
 
-    bool oncePerAttack = true; //True if we have not triggered animator this attack
+    private bool canShoot = true;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        projectileEnabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (enemyState.currentState)
+        if (enemyState.currentState != EnemyBehaviour.EnemyState.ATTACKING)
+            return;
+
+        Vector2 toPlayer = enemyState.GetVectorToPlayer();
+        float dist = toPlayer.magnitude;
+        Vector2 dirNorm = toPlayer.normalized;
+
+        if (dist > attackRange + rangeTolerance)
         {
-            case EnemyBehaviour.EnemyState.NEUTRAL:
-                oncePerAttack = true;
-                break;
-            case EnemyBehaviour.EnemyState.ATTACKING:
-                if (oncePerAttack)
-                {
-                    GetComponent<Animator>().SetTrigger("Attack");
-                    oncePerAttack = false;
-                }
-                enemyState.DecelerateTowardsZero();
-                if (projectileEnabled) ShootProjectile();
-                break;
-            case EnemyBehaviour.EnemyState.STUNNED:
-                break;
-            case EnemyBehaviour.EnemyState.CAPTURED:
-                break;
+            rb.velocity = dirNorm * attackMoveSpeed;
+        }
+        else if (dist < attackRange - rangeTolerance)
+        {
+            rb.velocity = -dirNorm * attackMoveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+
+            if (canShoot)
+                ShootProjectile();
         }
     }
 
     public void ShootProjectile()
     {
+        canShoot = false;
         const float DELTA = 1f;
 
         Vector2 dirn = enemyState.GetVectorToPlayer().normalized;
@@ -84,13 +88,11 @@ public class EnemyProjectileBehaviour : MonoBehaviour
 
     private void DisableProjectile()
     {
-        projectileEnabled = false;
-
-        Invoke("EnableProjectile", attackCooldown);
+        Invoke(nameof(EnableProjectile), attackCooldown);
     }
 
     private void EnableProjectile()
     {
-        projectileEnabled = true;
+        canShoot = true;
     }
 }
