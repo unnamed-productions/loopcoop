@@ -81,6 +81,11 @@ public class AudioManager : MonoBehaviour
         music.Play();
     }
 
+    public void StopMusic()
+    {
+        music.Stop();
+    }
+
     public void PauseMusic()
     {
         music.mute = true;
