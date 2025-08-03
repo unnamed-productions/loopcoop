@@ -66,10 +66,10 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.currentGameState == GameManager.GameState.PAUSED)
-        {
-            return;
-        }
+        // if (GameManager.instance.currentGameState == GameManager.GameState.PAUSED)
+        // {
+        //     return;
+        // }
         switch (currentState)
         {
             case EnemyState.NEUTRAL:
@@ -87,8 +87,6 @@ public class EnemyBehaviour : MonoBehaviour
     public void MoveTowardsPlayer()
     {
         Vector2 dirn = GetVectorToPlayer().normalized;
-        Debug.Log(dirn);
-        Debug.Log(acceleration);
         // if (dirn.x > 0)
         // {
         //     anim.SetBool("Left", false);
