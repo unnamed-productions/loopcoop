@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PlayerCombat player;
+    [SerializeField]
+    private GameObject pauseScreen;
 
     void Start()
     {
@@ -40,10 +42,12 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.PAUSED)
         {
             currentGameState = GameState.PAUSED;
+            pauseScreen.SetActive(true);
         }
         else
         {
             currentGameState = GameState.PLAYING;
+            pauseScreen.SetActive(false);
         }
     }
     
