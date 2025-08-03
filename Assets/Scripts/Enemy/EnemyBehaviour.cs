@@ -54,6 +54,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     public int points;
 
+    [SerializeField]
+    GameObject deadEnemyPrefab;
+
     // [SerializeField]
     // Sound hitSound;
 
@@ -167,8 +170,6 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collision entered");
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.name == "Player")
         {
             Debug.Log("player collision");
@@ -253,5 +254,12 @@ public class EnemyBehaviour : MonoBehaviour
         Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
         Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
         return playerPos - enemyPos;
+    }
+
+    public void KillMe()
+    {
+        Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
+        Destroy(gameObject);
+        //TODO add points
     }
 }

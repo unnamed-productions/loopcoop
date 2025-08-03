@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1281059542502988205}
   - component: {fileID: 8784293401977423781}
   - component: {fileID: 8873754662497589409}
-  m_Layer: 0
+  - component: {fileID: 2148382486620333501}
+  m_Layer: 6
   m_Name: Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,3 +134,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.3150353, y: 0.5118952}
   m_EdgeRadius: 0
+--- !u!114 &2148382486620333501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779031656554549796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be43d084980b4c43b9cc9565d1d764b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camShake: {fileID: 0}
+  cameraShakeDur: 0.25
+  cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2148382486620333501}
+        m_TargetAssemblyTypeName: YarnBallHittable, Assembly-CSharp
+        m_MethodName: SampleEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

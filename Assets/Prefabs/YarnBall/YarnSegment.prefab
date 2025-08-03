@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1565841906404484793}
   - component: {fileID: 286548548195153538}
   - component: {fileID: 7879419526263265079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: YarnSegment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
