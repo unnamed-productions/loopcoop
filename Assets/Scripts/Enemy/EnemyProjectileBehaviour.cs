@@ -22,6 +22,8 @@ public class EnemyProjectileBehaviour : MonoBehaviour
     [SerializeField]
     float projectileSpreadDegrees = 5f;
 
+    bool oncePerAttack = true; //True if we have not triggered animator this attack
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +37,14 @@ public class EnemyProjectileBehaviour : MonoBehaviour
         switch (enemyState.currentState)
         {
             case EnemyBehaviour.EnemyState.NEUTRAL:
+                oncePerAttack = true;
                 break;
             case EnemyBehaviour.EnemyState.ATTACKING:
+                if (oncePerAttack)
+                {
+                    GetComponent<Animator>().SetTrigger("Attack");
+                    oncePerAttack = false;
+                }
                 enemyState.DecelerateTowardsZero();
                 if (projectileEnabled) ShootProjectile();
                 break;
