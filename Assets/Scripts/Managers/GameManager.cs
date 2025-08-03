@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int score;
 
     [SerializeField]
-    private TopDownPlayer player;
+    private PlayerCombat player;
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public TopDownPlayer GetPlayer()
+    public PlayerCombat GetPlayer()
     {
         return player;
     }
