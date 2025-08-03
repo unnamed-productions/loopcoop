@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     public enum EnemyState
     {
         NEUTRAL,
-        WALKING_TOWARDS_PLAYER,
         ATTACKING,
         // enemy is captured by lasso and is frozen
         CAPTURED,
@@ -15,19 +14,21 @@ public class EnemyBehavior : MonoBehaviour
         STUNNED
     }
 
-    private EnemyState currentState;
+    public EnemyState currentState;
 
-    Rigidbody2D rb;
-    Animator anim;
+    private EnemyState previousState;
 
-    [SerializeField]
-    float maxSpeed = 5;
-
-    [SerializeField]
-    float deceleration = 0.1f;
+    public Rigidbody2D rb;
+    // Animator anim;
 
     [SerializeField]
-    float acceleration = 0.3f;
+    public float maxSpeed = 5;
+
+    [SerializeField]
+    public float deceleration = 0.1f;
+
+    [SerializeField]
+    public float acceleration = 0.3f;
 
     [SerializeField]
     float force = 10;
@@ -57,76 +58,72 @@ public class EnemyBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         curHealth = maxHealth;
-        anim = GetComponent<Animator>();
+        // anim = GetComponent<Animator>();
         // TODO: start in neutral, walk towards player when within range
-        currentState = EnemyState.WALKING_TOWARDS_PLAYER;
+        currentState = EnemyState.NEUTRAL;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.currentGameState == GameManager.GameState.PAUSED)
-        {
-            return;
-        }
+        // if (GameManager.instance.currentGameState == GameManager.GameState.PAUSED)
+        // {
+        //     return;
+        // }
         switch (currentState)
         {
             case EnemyState.NEUTRAL:
-                rb.velocity = Vector3.zero;
-                break;
-            case EnemyState.WALKING_TOWARDS_PLAYER:
-                if (rb.velocity.magnitude > maxSpeed)
-                {
-                    rb.velocity -= rb.velocity.normalized * deceleration;
-                }
-                else
-                {
-                    MoveTowardsPlayer();
-                }
                 break;
             case EnemyState.ATTACKING:
                 break;
             case EnemyState.STUNNED:
+                DecelerateTowardsZero();
                 break;
             case EnemyState.CAPTURED:
                 break;
         }
     }
 
-    public void MoveTowardsPlayer(){
-        Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
-        Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 dirn = (playerPos - enemyPos).normalized;
-        if (dirn.x > 0)
-        {
-            anim.SetBool("Left", false);
-        }
-        else
-        {
-            anim.SetBool("Left", true);
-        }
+    public void MoveTowardsPlayer()
+    {
+        Vector2 dirn = GetVectorToPlayer().normalized;
+        // if (dirn.x > 0)
+        // {
+        //     anim.SetBool("Left", false);
+        // }
+        // else
+        // {
+        //     anim.SetBool("Left", true);
+        // }
         rb.velocity += dirn * acceleration;
+        Debug.Log($"velocity: {rb.velocity}");
     }
 
-    public void DecelerateTowardsZero(){
-        rb.velocity -= (rb.velocity.normalized * deceleration);
-        if(rb.velocity.magnitude <= deceleration){
+    public void DecelerateTowardsZero()
+    {
+        rb.velocity -= rb.velocity.normalized * deceleration;
+        if (rb.velocity.magnitude <= deceleration)
+        {
             rb.velocity = new Vector2(0, 0);
         }
     }
 
-    private void Stun(float time){
+    public void Stun(float time)
+    {
+        if (currentState != EnemyState.STUNNED) previousState = currentState;
         currentState = EnemyState.STUNNED;
 
         Invoke("Unstun", time);
     }
 
-    private void Unstun(){
-        currentState = EnemyState.WALKING_TOWARDS_PLAYER;
+    private void Unstun()
+    {
+        currentState = previousState;
     }
 
     private void Capture()
     {
+        if(previousState != EnemyState.STUNNED) previousState = currentState;
         currentState = EnemyState.CAPTURED;
 
         // TODO lasso swing setup logic
@@ -134,40 +131,51 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Release()
     {
-        currentState = EnemyState.WALKING_TOWARDS_PLAYER;
+        currentState = previousState;
 
         // TODO lasso swing release logic
         // do we immediately kill the enemy after lassoing it? or just do some damage
     }
 
-    public bool CanAccelerate() {
+    public bool CanAccelerate()
+    {
         return rb.velocity.magnitude < maxSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.name == "TopDownPlayer") {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("collision entered");
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.name == "Player")
+        {
+            Debug.Log("player collision");
             Rigidbody2D playerRB = other.rigidbody;
             // apply pushback force on player and enemy in direction of collision
             Vector2 playerPushForce = (other.transform.position - transform.position).normalized * force;
             Vector2 enemyPushForce = (transform.position - other.transform.position).normalized * force;
 
             rb.AddForce(enemyPushForce, ForceMode2D.Impulse);
-            GameManager.instance.GetPlayer().Hit(contactDamage, 0.2f, playerPushForce);
+            // GameManager.instance.GetPlayer().Hit(contactDamage, 0.2f, playerPushForce);
 
 
             Stun(0.5f);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.name == "TopDownPlayer") {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            Debug.Log("player trigger");
             currentState = EnemyState.ATTACKING;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.name == "TopDownPlayer") {
-            currentState = EnemyState.WALKING_TOWARDS_PLAYER;
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.name == "TopDownPlayer")
+        {
+            currentState = EnemyState.NEUTRAL;
         }
     }
 
@@ -194,19 +202,30 @@ public class EnemyBehavior : MonoBehaviour
         Stun(stunTime);
     }
 
-    public bool IsAggro(){
+    public bool IsAggro()
+    {
         return currentState == EnemyState.ATTACKING;
     }
 
-    public bool IsCaptured(){
+    public bool IsCaptured()
+    {
         return currentState == EnemyState.CAPTURED;
     }
 
-    public void UpdateMaxSpeed(float newVal){
+    public void UpdateMaxSpeed(float newVal)
+    {
         maxSpeed = newVal;
     }
 
-    public float GetAcceleration(){
+    public float GetAcceleration()
+    {
         return acceleration;
+    }
+
+    public Vector2 GetVectorToPlayer()
+    {
+        Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
+        Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
+        return playerPos - enemyPos;
     }
 }
