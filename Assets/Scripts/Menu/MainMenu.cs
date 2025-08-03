@@ -6,12 +6,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Sound buttonPressSound;
 
-    //[SerializeField]
-    //Sound mainMenuMusic;
+    [SerializeField]
+    Sound mainMenuMusic;
 
     public void Awake()
     {
-        //AudioManager.instance.PlayMusic(mainMenuMusic.clip, mainMenuMusic.loop, mainMenuMusic.volume);
+        //AudioManager.instance.PlayMusic(mainMenuMusic.clip);
     }
 
     public void StartGame()
@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
         AudioManager.instance.StopMusic();
         AudioManager.instance.PlaySound(buttonPressSound, transform);
         GameManager.instance.StartGame();
+        
     }
 
     public void OpenSettings()
