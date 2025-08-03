@@ -49,7 +49,6 @@ public class Projectile : MonoBehaviour
         {
             sprite.flipY = true;
         }
-        Debug.Log("Angle:" + angle);
         transform.rotation = Quaternion.Euler(0, 0, angle);
         this.damage = damage;
         this.owner = owner;
