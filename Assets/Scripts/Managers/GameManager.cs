@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public int health;
 
     [SerializeField]
-    private TopDownPlayer player;
+    private PlayerCombat player;
 
     void Start()
     {
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
             currentGameState = GameState.PLAYING;
         }
     }
-
+    
     public void ToggleGameOver()
     {
         currentGameState = GameState.GAME_OVER;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
-    public TopDownPlayer GetPlayer()
+    public PlayerCombat GetPlayer()
     {
         return player;
     }

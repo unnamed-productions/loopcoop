@@ -42,12 +42,15 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
 
+    PlayerCombat playerState;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         dashCounter.enabled = false;
         animator = GetComponent<Animator>();
+        playerState = GetComponent<PlayerCombat>();
     }
 
     void StartDash(Vector2 direction)
@@ -83,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (playerState.IsStunned())
+        {
+            return;
+        }
         if (dashing || timeSinceDashEnd < chainTime)
         {
             dashCounter.text = dashCount.ToString();
@@ -123,6 +130,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (playerState.IsStunned())
+        {
+            return;
+        }
         if (dashTimer < 0)
             StopDash();
 
