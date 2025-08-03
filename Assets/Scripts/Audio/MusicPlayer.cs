@@ -10,11 +10,14 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField]
     Sound s;
 
+    [Range(0, 1)]
+    public float musicVolume;
+
     // Start is called before the first frame update
     void Start()
     {
         if (a) {
-            AudioManager.instance.PlayMusic(a);
+            AudioManager.instance.PlayMusic(a, true, musicVolume);
         }
         if (s.clip) {
             AudioManager.instance.PlaySound(s, transform);
