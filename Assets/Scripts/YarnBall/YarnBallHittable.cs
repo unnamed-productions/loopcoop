@@ -12,6 +12,11 @@ public class YarnBallHittable : MonoBehaviour
     [SerializeField]
     float cameraShakeIntensity;
 
+    void Start()
+    {
+        camShake = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraShake>();
+    }
+
     [SerializeField] public UnityEvent onHit;
 
     public void hitMe(float intensity)
