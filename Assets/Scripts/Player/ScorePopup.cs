@@ -68,6 +68,8 @@ public class ScorePopup : MonoBehaviour
 
     public void PopUpScore(int score)
     {
+        scoreFlavor.transform.localScale = Vector3.one;
+        scoreText.transform.localScale = Vector3.one;
         scoreFlavor.SetText(GetFlavorText(score));
         scoreText.SetText(GetScoreText(score));
         scoreText.enabled = true;
