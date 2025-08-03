@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject settingsMenu;
     [SerializeField]
     Sound buttonPressSound;
 
@@ -17,12 +16,19 @@ public class MainMenu : MonoBehaviour
     public void OpenSettings()
     {
         //AudioManager.instance.PlaySound(buttonPressSound, transform);
-        settingsMenu.SetActive(true);
+        SceneManager.LoadScene("Settings");
     }
 
     public void CloseSettings()
     {
-        settingsMenu.SetActive(false);
+        if (GameManager.instance.currentGameState == GameManager.GameState.PAUSED)
+        {
+            GameManager.instance.TogglePause();
+        }
+        else if (GameManager.instance.currentGameState == GameManager.GameState.MAIN_MENU)
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 
     public void OpenTutorial()
