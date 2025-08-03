@@ -44,12 +44,6 @@ public class Projectile : MonoBehaviour
     public void Initialize(Vector2 dirn, int damage, Transform owner)
     {
         direction = new Vector2(dirn.x, dirn.y);
-        float angle = Mathf.Atan2(dirn.y, dirn.x) * Mathf.Rad2Deg;
-        if (shouldFlip && Mathf.Abs(angle) > 90)
-        {
-            sprite.flipY = true;
-        }
-        transform.rotation = Quaternion.Euler(0, 0, angle);
         this.damage = damage;
         this.owner = owner;
         // animator.Play("Default");
