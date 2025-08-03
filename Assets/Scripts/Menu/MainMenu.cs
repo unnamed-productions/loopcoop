@@ -6,8 +6,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     Sound buttonPressSound;
 
-    [SerializeField]
-    Sound mainMenuMusic;
+    //[SerializeField]
+    //Sound mainMenuMusic;
 
     public void Awake()
     {

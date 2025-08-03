@@ -75,11 +75,9 @@ public class AudioManager : MonoBehaviour
         UnityEngine.Object.Destroy(g);
     }
 
-    public void PlayMusic(AudioClip musicToPlay, bool loop, float volume=0.5f)
+    public void PlayMusic(AudioClip musicToPlay)
     {
         music.clip = musicToPlay;
-        music.loop = loop;
-        music.volume = volume;
         music.Play();
     }
 
