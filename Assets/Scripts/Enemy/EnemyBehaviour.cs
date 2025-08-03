@@ -259,6 +259,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void KillMe()
     {
         Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
+        GameManager.instance.addScore(points);
         Destroy(gameObject);
         //TODO add points
     }

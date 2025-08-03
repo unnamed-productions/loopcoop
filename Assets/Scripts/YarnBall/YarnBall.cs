@@ -158,7 +158,7 @@ public class YarnBall : MonoBehaviour
             //print("Velocity mag " + rb.velocity.magnitude);
             if (hit.GetComponent<EnemyBehaviour>())
             {
-                totalPoints *= hit.GetComponent<EnemyBehaviour>().points;
+                totalPoints += hit.GetComponent<EnemyBehaviour>().points;
             }
             currSmacksRemaining = (int)((rb.velocity.magnitude - VelocityThreshold) / VelocityStepSize);
             print("Initiated hit, can hit " + currSmacksRemaining + " extra targets");
@@ -200,7 +200,10 @@ public class YarnBall : MonoBehaviour
     private void Dissolve()
     {
         //TODO
-        //Play animation, add points, make particles, kinda do whatever
+        float multtoadd = .1f * Mathf.Clamp(currChainSmacks, 1, 100);
+        GameManager.instance.AddMult(multtoadd);
+        print("Adding total points " + totalPoints);
+        GameManager.instance.addScore(totalPoints);
         foreach (SpriteRenderer s in DeadSprites)
         {
             Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = s.sprite;
