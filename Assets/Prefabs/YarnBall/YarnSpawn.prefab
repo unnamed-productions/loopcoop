@@ -101,6 +101,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnPrefab: {fileID: 1289707386569547950, guid: b32eccdb5b22c493fa199c7ce88e3859, type: 3}
+  loopSound:
+    clip: {fileID: 8300000, guid: a7e8c17d3f03a654b86cc953832303a1, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    useProximity: 0
+  snared: []
 --- !u!95 &8693372654425511775
 Animator:
   serializedVersion: 7

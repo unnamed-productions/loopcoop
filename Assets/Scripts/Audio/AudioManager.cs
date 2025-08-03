@@ -78,6 +78,8 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(AudioClip musicToPlay)
     {
         music.clip = musicToPlay;
+        music.loop = true;
+        music.volume = 0.5f;
         music.Play();
     }
 

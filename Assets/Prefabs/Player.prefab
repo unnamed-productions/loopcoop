@@ -570,6 +570,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 10
+  hearts: []
+  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  playerHurtSound:
+    clip: {fileID: 8300000, guid: 67097245e6ac4e843a7c2b71522ed8a2, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    useProximity: 0
+  playerDeathSound:
+    clip: {fileID: 8300000, guid: b17f64db1708dac4c93359e481871436, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    useProximity: 0
 --- !u!1 &4412422458489364094
 GameObject:
   m_ObjectHideFlags: 0

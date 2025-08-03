@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleBackToMainMenu()
     {
+        AudioManager.instance.StopMusic();
         currentGameState = GameState.MAIN_MENU;
         SceneManager.LoadScene("Main Menu");
     }

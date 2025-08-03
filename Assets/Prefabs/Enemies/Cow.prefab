@@ -173,6 +173,12 @@ MonoBehaviour:
   waypointDistance: 3
   deadSprite: {fileID: 21300000, guid: a87dd9acf2c4844ebbc03dddbf7a63f2, type: 3}
   points: 100
+  dieSound:
+    clip: {fileID: 8300000, guid: d1ac713d499dff843b0de6204b16ff73, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    useProximity: 0
 --- !u!50 &4195145167912692531
 Rigidbody2D:
   serializedVersion: 4

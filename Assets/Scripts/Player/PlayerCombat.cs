@@ -19,6 +19,12 @@ public class PlayerCombat : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    [SerializeField]
+    Sound playerHurtSound;
+
+    [SerializeField]
+    Sound playerDeathSound;
+
 
     void Start()
     {
@@ -30,8 +36,7 @@ public class PlayerCombat : MonoBehaviour
     {
 
         if (!invulnerable)
-        {
-           
+        {  
             curHealth -= damage;
 
             for(int i = 0; i < maxHealth; i++) {
@@ -48,8 +53,13 @@ public class PlayerCombat : MonoBehaviour
             // AudioManager.instance.PlaySound(hitSound, transform);
             if (curHealth < 1)
             {
+                AudioManager.instance.PlaySound(playerDeathSound, transform);
                 GameManager.instance.ToggleGameOver();
                 return;
+            }
+            else
+            {
+                AudioManager.instance.PlaySound(playerHurtSound, transform);
             }
       
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
