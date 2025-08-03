@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b9ac399369af4f83a59c2c7c4e6a07c
+guid: b6e1cba56e9b74f93bdeca6492cd39e1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cat Running_0
+      name: cat_run_swing_sheet_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 3
-        width: 148
-        height: 201
+        x: 205
+        y: 1149
+        width: 588
+        height: 772
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d12a692f71a2d4f9c84b44db0b597082
-      internalID: 913409634
+      spriteID: 7853c57e0e66f42eeb05d8da4714ceb5
+      internalID: 1355171001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat Running_1
+      name: cat_run_swing_sheet_1
       rect:
         serializedVersion: 2
-        x: 292
-        y: 1
-        width: 149
-        height: 191
+        x: 1229
+        y: 1203
+        width: 588
+        height: 746
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76d7e51d102794c1cba0f8e33fbe9f21
-      internalID: 5647493
+      spriteID: edb8998aa228e415b9d673b784ab1ed6
+      internalID: -1725923981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat Running_2
+      name: cat_run_swing_sheet_2
       rect:
         serializedVersion: 2
-        x: 543
-        y: 3
-        width: 148
-        height: 201
+        x: 2237
+        y: 1220
+        width: 528
+        height: 745
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55d620dfbb32b4da8b67415d40039ec7
-      internalID: 323338006
+      spriteID: f09cf8eb3a3b740df83195cd82f3f213
+      internalID: -1334799221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cat Running_3
+      name: cat_run_swing_sheet_3
       rect:
         serializedVersion: 2
-        x: 802
-        y: 3
-        width: 149
-        height: 189
+        x: 3277
+        y: 1203
+        width: 588
+        height: 746
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32593bd5f7df740bdbc02b55bb47cbe4
-      internalID: -708320230
+      spriteID: 3b3eaef2d45e647338ff0f986959afd3
+      internalID: -1576182453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_run_swing_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 125
+        width: 594
+        height: 766
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35240a1d5381c46e2badd3ff6ed27b8d
+      internalID: 1297272558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_run_swing_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 181
+        width: 580
+        height: 744
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b770fb1006f46beb3f89f1b0011829
+      internalID: -559717101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_run_swing_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 194
+        width: 590
+        height: 745
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29994679796da4af5addb45b6b966704
+      internalID: -163096710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_run_swing_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 3279
+        y: 181
+        width: 580
+        height: 744
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda1f23154e474456aa7768ece7ccd38
+      internalID: 553606542
       vertices: []
       indices: 
       edges: []
@@ -196,7 +280,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3f3e8a91a9446421893990adf69bf457
+    spriteID: 0f8b942ee2314438aaf113166a5de6ac
     internalID: 0
     vertices: []
     indices: 
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Cat Running_0: 913409634
-      Cat Running_1: 5647493
-      Cat Running_2: 323338006
-      Cat Running_3: -708320230
+      cat_run_swing_sheet_0: 1355171001
+      cat_run_swing_sheet_1: -1725923981
+      cat_run_swing_sheet_2: -1334799221
+      cat_run_swing_sheet_3: -1576182453
+      cat_run_swing_sheet_4: 1297272558
+      cat_run_swing_sheet_5: -559717101
+      cat_run_swing_sheet_6: -163096710
+      cat_run_swing_sheet_7: 553606542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

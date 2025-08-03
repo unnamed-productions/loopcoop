@@ -53,19 +53,21 @@ public class PlayerMovement : MonoBehaviour
     void StartDash(Vector2 direction)
     {
         dashing = true;
-        dashCount ++;
+        dashCount++;
         dashTimer = dashTime;
         timeSinceDashEnd = Mathf.Infinity;
         dashDirection = direction;
+        animator.SetTrigger("startDash");
 
     }
 
-   void StopDash()
+    void StopDash()
     {
         dashing = false;
         dashTimer = 0f;
         timeSinceDashEnd = 0f; // Start chain window
         body.velocity = Vector2.zero;
+        animator.SetTrigger("endDash");
 
     }
 
