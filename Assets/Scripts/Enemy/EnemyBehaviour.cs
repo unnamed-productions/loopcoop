@@ -110,8 +110,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void Stun(float time)
     {
-        Debug.Log("stunned");
-        previousState = currentState;
+        if (currentState != EnemyState.STUNNED) previousState = currentState;
         currentState = EnemyState.STUNNED;
 
         Invoke("Unstun", time);
@@ -119,13 +118,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Unstun()
     {
-        Debug.Log("unstunned");
         currentState = previousState;
     }
 
     private void Capture()
     {
-        previousState = currentState;
+        if(previousState != EnemyState.STUNNED) previousState = currentState;
         currentState = EnemyState.CAPTURED;
 
         // TODO lasso swing setup logic

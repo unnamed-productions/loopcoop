@@ -14,6 +14,8 @@ public class YarnTrail : MonoBehaviour
     [SerializeField] private float loopCloseThreshold = 0.5f;
     [SerializeField] private int minSegmentsForLoop = 8;
 
+    public int loopedEnemyCount { get; private set; }
+
     private List<Vector3> trailPoints = new();
     private List<GameObject> yarnSegments = new();
     private Vector3 lastSpawnPos;
@@ -87,7 +89,17 @@ public class YarnTrail : MonoBehaviour
 
         if (loopStart < 0) return;
 
-        Debug.Log($"Loop detected at segment #{loopStart}. Clearing entire trail.");
+        Debug.Log($"Loop detected between {loopStart} and {count - 1}");
+
+        // Build the closed-loop polygon
+        var polygon = new List<Vector2>();
+        for (int i = loopStart; i < count; i++)
+            polygon.Add(trailPoints[i]);
+
+        // close the loop back to the first point
+        polygon.Add(trailPoints[loopStart]);
+
+        HandleLoopedEnemies(polygon);
 
         ClearTrail();
     }
@@ -130,5 +142,50 @@ public class YarnTrail : MonoBehaviour
     public List<GameObject> GetYarnSegments()
     {
         return yarnSegments;
+    }
+    
+    bool IsPointInPolygon(Vector2 point, List<Vector2> poly)
+    {
+        int crossings = 0;
+        int n = poly.Count;
+        for (int i = 0; i < n; i++)
+        {
+            Vector2 a = poly[i];
+            Vector2 b = poly[(i + 1) % n];
+            bool cond = (a.y > point.y) != (b.y > point.y);
+            if (cond)
+            {
+                float t = (point.y - a.y) / (b.y - a.y);
+                float xCross = a.x + t * (b.x - a.x);
+                if (point.x < xCross) crossings++;
+            }
+        }
+        return (crossings & 1) == 1;
+    }
+
+    void HandleLoopedEnemies(List<Vector2> loopPolygon)
+    {
+        // reset count
+        loopedEnemyCount = 0;
+
+        // collect snared enemies
+        var snared = new List<GameObject>();
+        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (IsPointInPolygon(enemy.transform.position, loopPolygon))
+            {
+                loopedEnemyCount++;
+                snared.Add(enemy);
+                //Destroy(enemy);
+            }
+        }
+
+        Debug.Log($"Enemies looped: {loopedEnemyCount}");
+
+        // foreach (var e in snared) {
+        //     e.GetComponent<EnemyController>().Snare();
+        //     e.GetComponent<Animator>().SetTrigger("Looped");
+        // }
+
     }
 }
