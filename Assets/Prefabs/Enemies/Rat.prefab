@@ -123,6 +123,12 @@ MonoBehaviour:
   waypointDistance: 3
   deadSprite: {fileID: 21300000, guid: a1359377f60c447f2bc19c2f06845b48, type: 3}
   points: 500
+  dieSound:
+    clip: {fileID: 8300000, guid: ed25cdb01bbf05e48aa155feec625659, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    useProximity: 0
   deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
 --- !u!114 &-2496903714937062424
 MonoBehaviour:

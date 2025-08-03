@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+
     public enum EnemyState
     {
         NEUTRAL,
@@ -60,6 +61,8 @@ public class EnemyBehaviour : MonoBehaviour
     // [SerializeField]
     // Sound hitSound;
 
+
+
     int curHealth;
 
     private static Vector2[] cardinalDirs = {
@@ -70,6 +73,9 @@ public class EnemyBehaviour : MonoBehaviour
     };
 
     private Vector2 chosenOffset;
+
+    [SerializeField]
+    Sound dieSound;
 
     // Start is called before the first frame update
     void Start()
@@ -226,6 +232,11 @@ public class EnemyBehaviour : MonoBehaviour
 
         rb.AddForce(knockbackForce, ForceMode2D.Impulse);
         Stun(stunTime);
+    }
+
+    public void KillMe()
+    {
+        AudioManager.instance.PlaySound(dieSound, transform);
     }
 
     public bool IsAggro()

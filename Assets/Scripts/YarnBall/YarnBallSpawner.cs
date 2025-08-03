@@ -7,6 +7,9 @@ public class YarnBallSpawner : MonoBehaviour
     [SerializeField]
     GameObject yarnPrefab;
 
+    [SerializeField]
+    Sound loopSound;
+
     public List<GameObject> snared;
 
     public void setSnared(List<GameObject> snard)
@@ -18,5 +21,6 @@ public class YarnBallSpawner : MonoBehaviour
     {
         Instantiate(yarnPrefab, transform.position, Quaternion.identity).GetComponent<YarnBall>().RegisterEnemies(snared);
         Destroy(gameObject);
+        AudioManager.instance.PlaySound(loopSound, transform);
     }
 }
