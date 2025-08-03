@@ -1130,9 +1130,10 @@ GameObject:
   - component: {fileID: 847128897}
   - component: {fileID: 847128896}
   - component: {fileID: 847128903}
+  - component: {fileID: 847128904}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1202,6 +1203,7 @@ MonoBehaviour:
   yOffset: 0.3
   loopCloseThreshold: 0.5
   minSegmentsForLoop: 8
+  yarnSpawnerPrefab: {fileID: 9085868988431645525, guid: be85205867b58404494e6a85dc19e370, type: 3}
 --- !u!95 &847128898
 Animator:
   serializedVersion: 7
@@ -1405,6 +1407,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 10
+--- !u!232 &847128904
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847128895}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 1.1181831
+  m_MaxDistanceOnly: 0
 --- !u!1001 &951255470
 PrefabInstance:
   m_ObjectHideFlags: 0

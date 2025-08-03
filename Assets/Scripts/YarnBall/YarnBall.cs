@@ -44,13 +44,16 @@ public class YarnBall : MonoBehaviour
     private int currSmacksRemaining;
     private int currChainSmacks = 1; //The number of targets hit in this chain
 
-
+    [SerializeField]
+    List<SpriteRenderer> DeadSprites;
+    private int totalPoints;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         children = new List<GameObject>();
+        playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         init();
     }
 
@@ -123,6 +126,22 @@ public class YarnBall : MonoBehaviour
             transform.position = GetComponent<DistanceJoint2D>().connectedBody.transform.position;
             GetComponent<DistanceJoint2D>().connectedAnchor = GetComponent<DistanceJoint2D>().connectedBody.transform.position;
             yield return null;
+        }
+    }
+
+    public void RegisterEnemies(List<GameObject> enemies)
+    {
+        for (int i = 0; i < enemies.Count && i < DeadSprites.Count; i++)
+        {
+            DeadSprites[i].sprite = enemies[i].GetComponent<EnemyBehaviour>().deadSprite;
+        }
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            totalPoints += enemies[i].GetComponent<EnemyBehaviour>().points;
+        }
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i]);
         }
     }
 

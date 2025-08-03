@@ -230,6 +230,8 @@ MonoBehaviour:
     loop: 0
     useProximity: 0
   enemyDeathAnimation: {fileID: 0}
+  deadSprite: {fileID: 21300000, guid: e1c06be5e67914a90a0c5741d631b320, type: 3}
+  points: 250
 --- !u!114 &-3816735101032803601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleWalkSpeed: 0.4
   enemyState: {fileID: -8454103000983131514}
+  biasedTowardsPlayer: 0
 --- !u!95 &6498114896740871008
 Animator:
   serializedVersion: 7

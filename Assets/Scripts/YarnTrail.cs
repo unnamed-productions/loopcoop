@@ -20,6 +20,8 @@ public class YarnTrail : MonoBehaviour
     private List<GameObject> yarnSegments = new();
     private Vector3 lastSpawnPos;
 
+    [SerializeField] GameObject yarnSpawnerPrefab;
+
     void Start()
     {
         lastSpawnPos = transform.position;
@@ -123,12 +125,12 @@ public class YarnTrail : MonoBehaviour
 
     public void ClearTrailFrom(int index)
     {
-        for (int i = 0; i < index+1; i++)
+        for (int i = 0; i < index + 1; i++)
         {
             Destroy(yarnSegments[i]);
         }
-        yarnSegments.RemoveRange(0, index+1);
-        trailPoints.RemoveRange(0, index+1);
+        yarnSegments.RemoveRange(0, index + 1);
+        trailPoints.RemoveRange(0, index + 1);
 
         if (trailPoints.Count == 0)
         {
@@ -180,12 +182,26 @@ public class YarnTrail : MonoBehaviour
             }
         }
 
+        Instantiate(yarnSpawnerPrefab, GetMidpoint(loopPolygon),
+            Quaternion.identity).GetComponent<YarnBallSpawner>().setSnared(snared);
+
         Debug.Log($"Enemies looped: {loopedEnemyCount}");
+    }
 
-        // foreach (var e in snared) {
-        //     e.GetComponent<EnemyController>().Snare();
-        //     e.GetComponent<Animator>().SetTrigger("Looped");
-        // }
+    public static Vector2 GetMidpoint(List<Vector2> points)
+    {
+        if (points == null || points.Count == 0)
+        {
+            Debug.LogWarning("Point list is empty or null.");
+            return Vector2.zero;
+        }
 
+        Vector2 sum = Vector2.zero;
+        foreach (Vector2 point in points)
+        {
+            sum += point;
+        }
+
+        return sum / points.Count;
     }
 }

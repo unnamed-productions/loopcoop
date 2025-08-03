@@ -48,6 +48,12 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     EnemyDeathAnimation enemyDeathAnimation;
 
+    [SerializeField]
+    public Sprite deadSprite;
+    [SerializeField]
+    public int points;
+
+
     // [SerializeField]
     // Sound hitSound;
 
