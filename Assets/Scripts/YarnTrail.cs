@@ -153,9 +153,16 @@ public class YarnTrail : MonoBehaviour
             {
                 loopedEnemyCount++;
                 snared.Add(enemy);
+                //Destroy(enemy);
             }
         }
 
         Debug.Log($"Enemies looped: {loopedEnemyCount}");
+
+        // foreach (var e in snared) {
+        //     e.GetComponent<EnemyController>().Snare();
+        //     e.GetComponent<Animator>().SetTrigger("Looped");
+        // }
+
     }
 }
