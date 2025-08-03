@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,10 +25,20 @@ public class GameManager : MonoBehaviour
 
     public int score;
 
+    [SerializeField]
+    public TextMeshProUGUI scoreText;
+
+    [SerializeField]
+    public TextMeshProUGUI multText;
+    int gameScore = 0;
+    float gameMult = 1;
+    private float ogJitter;
+
     void Start()
     {
         currentGameState = GameState.MAIN_MENU;
         instance = this;
+        ogJitter = multText.GetComponent<Jitter>().maxDisplacement;
     }
 
     public void StartGame()
@@ -50,7 +61,7 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(false);
         }
     }
-    
+
     public void ToggleGameOver()
     {
         currentGameState = GameState.GAME_OVER;
@@ -73,5 +84,20 @@ public class GameManager : MonoBehaviour
     public PlayerCombat GetPlayer()
     {
         return player;
+    }
+
+    public void addScore(int score)
+    {
+        gameScore += (int)(gameMult * score);
+        scoreText.text = "Score: " + gameScore;
+        player.GetComponentInChildren<ScorePopup>().PopUpScore(score);
+    }
+
+    public void AddMult(float multToAdd)
+    {
+        gameMult *= (1 + multToAdd);
+        multText.text = "Multiplier: " + gameMult;
+        multText.GetComponent<Jitter>().maxDisplacement = ogJitter * gameMult;
+
     }
 }

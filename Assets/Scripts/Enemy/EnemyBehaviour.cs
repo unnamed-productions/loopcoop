@@ -268,4 +268,11 @@ public class EnemyBehaviour : MonoBehaviour
         Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
         return playerPos - enemyPos;
     }
+    public void KillMe()
+    {
+        Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
+        GameManager.instance.addScore(points);
+        Destroy(gameObject);
+        //TODO add points
+    }
 }
