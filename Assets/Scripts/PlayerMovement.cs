@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,21 +15,60 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight = false;
     private Vector2 movementVector = Vector2.zero;
 
+
     //dash
     public float dashSpeed = 20;
     public AnimationCurve dashSpeedCurve;
-    public float maxDashTime = 0.2f;
+
     private bool dashing = false;
     private Vector2 dashDirection = Vector2.zero;
-    private float dashTime = 0f;
+    [SerializeField] private float dashTimer = 0f;
+    [SerializeField] private float dashTime = 0.5f;
+    [SerializeField] private float chainTime = 0.5f;
+    [SerializeField] private float timeSinceDashEnd = Mathf.Infinity;
+
+
+
+    //dash cooldown
+    [SerializeField] public float failedDashCooldownTime = 2;
+
+    //dash UI 
+    public TextMeshProUGUI dashCounter;
+    private int dashCount = 0;
 
 
     //components
     private Rigidbody2D body;
+    private SpriteRenderer sprite;
+    private Animator animator;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        dashCounter.enabled = false;
+        animator = GetComponent<Animator>();
+    }
+
+    void StartDash(Vector2 direction)
+    {
+        dashing = true;
+        dashCount++;
+        dashTimer = dashTime;
+        timeSinceDashEnd = Mathf.Infinity;
+        dashDirection = direction;
+        animator.SetTrigger("startDash");
+
+    }
+
+    void StopDash()
+    {
+        dashing = false;
+        dashTimer = 0f;
+        timeSinceDashEnd = 0f; // Start chain window
+        body.velocity = Vector2.zero;
+        animator.SetTrigger("endDash");
+
     }
 
     public Vector2 getMoveDirection()
@@ -39,47 +81,66 @@ public class PlayerMovement : MonoBehaviour
         return newMovementVector;
     }
 
-
     void Update()
     {
-    
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        Vector2 mouseWorldPoint = (Vector2)Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        Vector2 playerWorldPoint = (Vector2)transform.position;
-        Vector2 mouseDist = mouseWorldPoint - playerWorldPoint;
-        Vector2 newMovementVector = mouseDist.normalized;
-
-        if (Input.GetMouseButtonDown(0) && !dashing) {
-            dashing = true;
-            dashTime = maxDashTime;
-            dashDirection = newMovementVector;
+        if (dashing || timeSinceDashEnd < chainTime)
+        {
+            dashCounter.text = dashCount.ToString();
+            dashCounter.enabled = true;
         }
+        else dashCounter.enabled = false;
 
-        followDist = Mathf.Min(mouseDist.magnitude, maxFollowDist);
-        if (followDist < minFollowDist) followDist = 0;
-        float t = Time.deltaTime;
-        movementVector = Vector2.Lerp(movementVector, newMovementVector, t*turnSpeed);
 
-        facingRight = movementVector.x > 0;
-        float scalar = Mathf.Sign(facingRight ? -1f : 1f) * Mathf.Abs(transform.localScale.x);
-        transform.localScale = new Vector3(scalar, transform.localScale.y, transform.localScale.z);
-    }
+        Vector2 mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 toMouse = mouseWorldPoint - (Vector2)transform.position;
+        Vector2 newMovementVector = toMouse.normalized;
 
-    void FixedUpdate(){
-        
-        if (dashing) {
-            dashTime -= Time.fixedDeltaTime;
-            if (dashTime <= 0f) dashing = false;
-            else
+
+        if (Input.GetKeyDown(KeyCode.Space) && !dashing)
+        {
+            bool canChain = timeSinceDashEnd < chainTime;
+            bool canStartNew = timeSinceDashEnd > failedDashCooldownTime;
+
+            if (canChain || canStartNew)
             {
-                float t = 1f - (dashTime / maxDashTime);
-                float currDashSpeed = dashSpeed * dashSpeedCurve.Evaluate(t);
-                body.velocity = currDashSpeed * dashDirection;
-                return;
+                if (!canChain) dashCount = 0;
+                StartDash(newMovementVector);
             }
         }
 
-        float followMult = followCurve.Evaluate(followDist / maxFollowDist);
-        body.velocity = movementVector * movementSpeed * followMult;
+
+        followDist = Mathf.Min(toMouse.magnitude, maxFollowDist);
+        if (followDist < minFollowDist) followDist = 0;
+
+        movementVector = Vector2.Lerp(movementVector, newMovementVector, Time.deltaTime * turnSpeed);
+
+        if (movementVector.x != 0)
+        {
+            facingRight = movementVector.x > 0;
+            sprite.flipX = !facingRight;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (dashTimer < 0)
+            StopDash();
+
+        if (!dashing)
+        {
+            timeSinceDashEnd += Time.fixedDeltaTime;
+            float followT = followDist / maxFollowDist;
+            float followMult = followCurve.Evaluate(followT);
+            body.velocity = followMult * movementSpeed * movementVector;
+        }
+        else
+        {
+            dashTimer -= Time.fixedDeltaTime;
+            float t = 1f - (dashTimer / dashTime);
+            float speed = dashSpeed * dashSpeedCurve.Evaluate(t);
+            body.velocity = speed * dashDirection;
+        }
+
+        animator.SetFloat("speed", Mathf.Abs(body.velocity.magnitude));
     }
 }
