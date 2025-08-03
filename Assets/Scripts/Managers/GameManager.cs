@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class GameManager : MonoBehaviour
     {
         MAIN_MENU,
         PAUSED,
-        PLAYING
+        PLAYING,
+        GAME_OVER,
+
     }
 
     public GameState currentGameState;
 
     public int score;
+    public int health;
 
     [SerializeField]
     private PlayerCombat player;
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         currentGameState = GameState.PLAYING;
         score = 0;
+        health = 100; 
     }
 
     public void TogglePause()
@@ -40,6 +45,26 @@ public class GameManager : MonoBehaviour
         {
             currentGameState = GameState.PLAYING;
         }
+    }
+    
+    public void ToggleGameOver()
+    {
+        currentGameState = GameState.GAME_OVER;
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void ToggleRestart()
+    {
+        SceneManager.LoadScene("Movement");
+        currentGameState = GameState.PLAYING;
+        score = 0;
+        health = 100; 
+    }
+
+    public void ToggleBackToMainMenu()
+    {
+        currentGameState = GameState.MAIN_MENU;
+        SceneManager.LoadScene("Main Menu");
     }
 
     public PlayerCombat GetPlayer()

@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
     private InputAction _fireball;
     //Mixed
     private InputAction _pause;
+    private InputAction _restart;
 
     [Header("Action Access Variables")]
     //Overworld
@@ -35,6 +36,7 @@ public class InputManager : MonoBehaviour
     public bool fireballJustPressed;
     //Mixed
     public bool pauseJustPressed;
+    public bool restartJustPressed;
 
     private void SetupInputActions()
     {
@@ -47,6 +49,7 @@ public class InputManager : MonoBehaviour
         _fireball = _playerInput.actions["Fireball"];
         //Mixed
         _pause = _playerInput.actions["Pause"];
+        _restart = _playerInput.actions["Restart"];
     }
 
     private void UpdateInputs()
@@ -70,7 +73,8 @@ public class InputManager : MonoBehaviour
         fireballJustPressed = _fireball.WasPressedThisFrame();
         //Mixed
         pauseJustPressed = _pause.WasPressedThisFrame();
-    }
+        restartJustPressed = _restart.WasPressedThisFrame();
+    }    
 
     private void Awake()
     {

@@ -49,6 +49,10 @@ public class EnemyBehaviour : MonoBehaviour
     EnemyDeathAnimation enemyDeathAnimation;
 
     [SerializeField] private float waypointDistance = 3f;
+    [SerializeField]
+    public Sprite deadSprite;
+    [SerializeField]
+    public int points;
 
     // [SerializeField]
     // Sound hitSound;
@@ -105,7 +109,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void MoveTowardsPlayerOffset()
     {
-        // compute the actual point we’re heading for
+        // compute the actual point weï¿½re heading for
         Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
         Vector2 targetPos = playerPos + chosenOffset;
 
