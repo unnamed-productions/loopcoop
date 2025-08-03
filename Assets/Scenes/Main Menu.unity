@@ -1332,16 +1332,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPressSound:
-    clip: {fileID: 8300000, guid: e7abf5038b446f6438dd435d61333a89, type: 3}
+    clip: {fileID: 8300000, guid: 9365f19129400264eb122a3cdbaf24be, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
-    useProximity: 0
-  mainMenuMusic:
-    clip: {fileID: 8300000, guid: 0acc3118be98b7449ba7038f02363b81, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
     useProximity: 0
 --- !u!4 &1134054630
 Transform:
@@ -1654,7 +1648,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     useProximity: 0
-  musicVolume: 0.299
 --- !u!1 &2076538006
 GameObject:
   m_ObjectHideFlags: 0
