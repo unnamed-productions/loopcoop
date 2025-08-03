@@ -46,6 +46,8 @@ public class YarnBall : MonoBehaviour
 
     [SerializeField]
     List<SpriteRenderer> DeadSprites;
+    [SerializeField]
+    GameObject deadEnemyPrefab;
     private int totalPoints;
 
 
@@ -55,6 +57,9 @@ public class YarnBall : MonoBehaviour
         children = new List<GameObject>();
         playerRb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         init();
+
+        bool shouldCollide = Physics2D.GetIgnoreLayerCollision(6, 7);
+        Debug.Log($"Layer 6 and 7 should collide? {!shouldCollide}");
     }
 
     void Update()
@@ -151,6 +156,10 @@ public class YarnBall : MonoBehaviour
         {
             //First smack
             //print("Velocity mag " + rb.velocity.magnitude);
+            if (hit.GetComponent<EnemyBehaviour>())
+            {
+                totalPoints *= hit.GetComponent<EnemyBehaviour>().points;
+            }
             currSmacksRemaining = (int)((rb.velocity.magnitude - VelocityThreshold) / VelocityStepSize);
             print("Initiated hit, can hit " + currSmacksRemaining + " extra targets");
             if (currSmacksRemaining >= 1)
@@ -192,6 +201,11 @@ public class YarnBall : MonoBehaviour
     {
         //TODO
         //Play animation, add points, make particles, kinda do whatever
+        foreach (SpriteRenderer s in DeadSprites)
+        {
+            Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = s.sprite;
+
+        }
         playerRb.gameObject.GetComponent<DistanceJoint2D>().enabled = false; //Free player
         foreach (GameObject g in children)
         {
@@ -202,9 +216,15 @@ public class YarnBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Self layer: {gameObject.layer}, Other layer: {collision.gameObject.layer}");
         if (collision.gameObject.GetComponent<YarnBallHittable>())
         {
+            print("Hit a yarn ball hittable");
             Smack(collision.gameObject.GetComponent<YarnBallHittable>());
+        }
+        else
+        {
+            print("Did not hit a yarn ball hittable, hit " + collision.gameObject.name);
         }
     }
 }

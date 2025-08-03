@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6034938054161324471, guid: db90757abda3f6f449d158cc12ef0d42, type: 3}
   m_PrefabInstance: {fileID: 1672153759344009804}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1764226143}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fb2d1194c2c346bb9a7aad0fd75287f, type: 3}
@@ -1977,6 +1977,7 @@ GameObject:
   - component: {fileID: 643208235}
   - component: {fileID: 643208237}
   - component: {fileID: 643208236}
+  - component: {fileID: 643208238}
   m_Layer: 0
   m_Name: Farm
   m_TagString: Untagged
@@ -2099,6 +2100,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &643208238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643208234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be43d084980b4c43b9cc9565d1d764b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camShake: {fileID: 0}
+  cameraShakeDur: 0.25
+  cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 643208238}
+        m_TargetAssemblyTypeName: YarnBallHittable, Assembly-CSharp
+        m_MethodName: SampleEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &661067851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3402,7 +3433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1015921560}
   - component: {fileID: 1015921559}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4268,6 +4299,7 @@ GameObject:
   - component: {fileID: 1240774087}
   - component: {fileID: 1240774086}
   - component: {fileID: 1240774085}
+  - component: {fileID: 1240774090}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -4415,6 +4447,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1240774090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240774084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0a210cd212eb461fb8130aca126270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1764226143}
 --- !u!1001 &1241348910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5607,7 +5652,7 @@ MonoBehaviour:
   finalMinInterval: 1
   finalMaxInterval: 2
   accelerationDuration: 300
-  initialEnemyCount: 5
+  initialEnemyCount: 10
   enemyPrefabs:
   - {fileID: 2911466362553368697, guid: 865bf7b64f8e349fba901325d600b976, type: 3}
   - {fileID: 4203037775174607652, guid: a35e3fa20720948dc97ee78fdf48edf3, type: 3}
@@ -6427,6 +6472,11 @@ Transform:
   - {fileID: 1111107259}
   m_Father: {fileID: 950110773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1764226143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4012333787037562300, guid: db90757abda3f6f449d158cc12ef0d42, type: 3}
+  m_PrefabInstance: {fileID: 1672153759344009804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1771949904
 PrefabInstance:
   m_ObjectHideFlags: 0

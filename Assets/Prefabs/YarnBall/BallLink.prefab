@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5195600673500018778}
   - component: {fileID: 4969098777733736077}
   - component: {fileID: 6061360856757533802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BallLink
   m_TagString: Untagged
   m_Icon: {fileID: 0}

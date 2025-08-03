@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 675181716843623042}
   - component: {fileID: 7218466428263055578}
   - component: {fileID: 6034938054161324471}
+  - component: {fileID: 7978154216940889561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -421,7 +422,6 @@ MonoBehaviour:
   chainTime: 0.3
   timeSinceDashEnd: Infinity
   failedDashCooldownTime: 1
-  dashCounter: {fileID: 8820337852416106803}
 --- !u!50 &1829043665529111804
 Rigidbody2D:
   serializedVersion: 4
@@ -490,6 +490,7 @@ MonoBehaviour:
   yOffset: 0.3
   loopCloseThreshold: 0.5
   minSegmentsForLoop: 8
+  yarnSpawnerPrefab: {fileID: 0}
 --- !u!61 &7218466428263055578
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -549,3 +550,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 10
+--- !u!232 &7978154216940889561
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012333787037562300}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 0
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 1.1181831
+  m_MaxDistanceOnly: 0

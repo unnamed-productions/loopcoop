@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3816735101032803601}
   - component: {fileID: 268220319528208335}
   - component: {fileID: 6498114896740871008}
+  - component: {fileID: 2612586416150317268}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Enemy
@@ -233,6 +234,7 @@ MonoBehaviour:
   waypointDistance: 3
   deadSprite: {fileID: 21300000, guid: e1c06be5e67914a90a0c5741d631b320, type: 3}
   points: 250
+  deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
 --- !u!114 &-3816735101032803601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +252,7 @@ MonoBehaviour:
   rangeTolerance: 0.2
   attackMoveSpeed: 2
   attackCooldown: 5
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 4554657737592413410, guid: 9a2f51a43510a47de94ffdca8952a8e5, type: 3}
   projectileSpreadDeg: 5
   projectile: {fileID: 4554657737592413410, guid: 9a2f51a43510a47de94ffdca8952a8e5, type: 3}
   projectileSpreadDegrees: 10
@@ -291,3 +293,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2612586416150317268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2911466362553368697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be43d084980b4c43b9cc9565d1d764b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camShake: {fileID: 0}
+  cameraShakeDur: 0.25
+  cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8454103000983131514}
+        m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+        m_MethodName: KillMe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
