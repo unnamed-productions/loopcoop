@@ -178,7 +178,8 @@ public class YarnTrail : MonoBehaviour
             {
                 loopedEnemyCount++;
                 snared.Add(enemy);
-                //Destroy(enemy);
+                var sr = enemy.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.enabled = false;
             }
         }
 
