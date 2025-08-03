@@ -236,6 +236,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void KillMe()
     {
+        Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
+        Destroy(gameObject);
         AudioManager.instance.PlaySound(dieSound, transform);
     }
 
@@ -265,12 +267,5 @@ public class EnemyBehaviour : MonoBehaviour
         Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
         Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
         return playerPos - enemyPos;
-    }
-
-    public void KillMe()
-    {
-        Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
-        Destroy(gameObject);
-        //TODO add points
     }
 }
