@@ -233,14 +233,6 @@ public class EnemyBehaviour : MonoBehaviour
         rb.AddForce(knockbackForce, ForceMode2D.Impulse);
         Stun(stunTime);
     }
-
-    public void KillMe()
-    {
-        Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
-        Destroy(gameObject);
-        AudioManager.instance.PlaySound(dieSound, transform);
-    }
-
     public bool IsAggro()
     {
         return currentState == EnemyState.ATTACKING;
@@ -273,6 +265,7 @@ public class EnemyBehaviour : MonoBehaviour
         Instantiate(deadEnemyPrefab, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().sprite = deadSprite;
         GameManager.instance.addScore(points);
         Destroy(gameObject);
+        AudioManager.instance.PlaySound(dieSound, transform);
         //TODO add points
     }
 }
