@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.currentGameState != GameManager.GameState.PAUSED)
+        if (GameManager.instance.currentGameState == GameManager.GameState.PLAYING)
         {
             speedX = InputManager.instance.moveInput.x * moveSpeed;
             speedY = InputManager.instance.moveInput.y * moveSpeed;

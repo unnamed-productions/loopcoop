@@ -1,9 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject gameOverScreen;
 
     public enum GameState
     {
@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
         PAUSED,
         PLAYING,
         GAME_OVER,
-        TUTORIAL,
 
     }
 
@@ -36,25 +35,6 @@ public class GameManager : MonoBehaviour
         health = 100; 
     }
 
-    public void StartTutorial()
-    {
-        currentGameState = GameState.TUTORIAL;
-        score = 0;
-        health = 100; 
-    }
-
-    public void ToggleTutorialOver()
-    {
-        if (currentGameState == GameState.TUTORIAL)
-        {
-            currentGameState = GameState.PLAYING;
-        }
-        else
-        {
-            currentGameState = GameState.TUTORIAL;
-        }
-    }
-
     public void TogglePause()
     {
         if (currentGameState == GameState.PAUSED)
@@ -70,15 +50,21 @@ public class GameManager : MonoBehaviour
     public void ToggleGameOver()
     {
         currentGameState = GameState.GAME_OVER;
-        gameOverScreen.SetActive(true);
+        SceneManager.LoadScene("GameOver");
     }
 
     public void ToggleRestart()
     {
+        SceneManager.LoadScene("Movement");
         currentGameState = GameState.PLAYING;
-        gameOverScreen.SetActive(false);
         score = 0;
         health = 100; 
+    }
+
+    public void ToggleBackToMainMenu()
+    {
+        currentGameState = GameState.MAIN_MENU;
+        SceneManager.LoadScene("Main Menu");
     }
 
     public TopDownPlayer GetPlayer()
