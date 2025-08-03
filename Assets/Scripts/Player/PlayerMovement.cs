@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        yarn = sprite.transform.Find("Yarn").GetComponent<SpriteRenderer>();
+        yarn = transform.Find("Yarn").GetComponent<SpriteRenderer>();
         animator = transform.Find("Sprite").GetComponent<Animator>();
         playerState = GetComponent<PlayerCombat>();
     }
