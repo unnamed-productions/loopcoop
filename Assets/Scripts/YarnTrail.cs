@@ -178,12 +178,16 @@ public class YarnTrail : MonoBehaviour
             {
                 loopedEnemyCount++;
                 snared.Add(enemy);
-                //Destroy(enemy);
+                var sr = enemy.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.enabled = false;
             }
         }
 
-        Instantiate(yarnSpawnerPrefab, GetMidpoint(loopPolygon),
+        if (loopedEnemyCount > 0)
+        {
+            Instantiate(yarnSpawnerPrefab, GetMidpoint(loopPolygon),
             Quaternion.identity).GetComponent<YarnBallSpawner>().setSnared(snared);
+        }
 
         Debug.Log($"Enemies looped: {loopedEnemyCount}");
     }

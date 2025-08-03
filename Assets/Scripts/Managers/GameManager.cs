@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public string currentMainScene = "Health";
 
     public enum GameState
     {
@@ -16,11 +17,12 @@ public class GameManager : MonoBehaviour
 
     public GameState currentGameState;
 
-    public int score;
-    public int health;
-
     [SerializeField]
     private PlayerCombat player;
+    [SerializeField]
+    private GameObject pauseScreen;
+
+    public int score;
 
     void Start()
     {
@@ -31,8 +33,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         currentGameState = GameState.PLAYING;
+        SceneManager.LoadScene(currentMainScene);
         score = 0;
-        health = 100; 
     }
 
     public void TogglePause()
@@ -40,10 +42,12 @@ public class GameManager : MonoBehaviour
         if (currentGameState == GameState.PAUSED)
         {
             currentGameState = GameState.PAUSED;
+            pauseScreen.SetActive(true);
         }
         else
         {
             currentGameState = GameState.PLAYING;
+            pauseScreen.SetActive(false);
         }
     }
     
@@ -55,10 +59,9 @@ public class GameManager : MonoBehaviour
 
     public void ToggleRestart()
     {
-        SceneManager.LoadScene("Movement");
+        SceneManager.LoadScene(currentMainScene);
         currentGameState = GameState.PLAYING;
         score = 0;
-        health = 100; 
     }
 
     public void ToggleBackToMainMenu()

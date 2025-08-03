@@ -48,16 +48,25 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     EnemyDeathAnimation enemyDeathAnimation;
 
+    [SerializeField] private float waypointDistance = 3f;
     [SerializeField]
     public Sprite deadSprite;
     [SerializeField]
     public int points;
 
-
     // [SerializeField]
     // Sound hitSound;
 
     int curHealth;
+
+    private static Vector2[] cardinalDirs = {
+        Vector2.up,
+        Vector2.right,
+        Vector2.down,
+        Vector2.left
+    };
+
+    private Vector2 chosenOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -98,20 +107,20 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    public void MoveTowardsPlayer()
+    public void MoveTowardsPlayerOffset()
     {
-        Vector2 dirn = GetVectorToPlayer().normalized;
-        // if (dirn.x > 0)
-        // {
-        //     anim.SetBool("Left", false);
-        // }
-        // else
-        // {
-        //     anim.SetBool("Left", true);
-        // }
-        rb.velocity += dirn * acceleration;
-        Debug.Log($"velocity: {rb.velocity}");
+        // compute the actual point we�re heading for
+        Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
+        Vector2 targetPos = playerPos + chosenOffset;
+
+        Vector2 dir = (targetPos - (Vector2)transform.position).normalized;
+        rb.velocity = dir * maxSpeed;
+
+        // optional: flip sprite
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr) sr.flipX = dir.x < 0;
     }
+
 
     public void DecelerateTowardsZero()
     {
@@ -178,9 +187,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("player trigger");
+            int idx = Random.Range(0, cardinalDirs.Length);
+            chosenOffset = cardinalDirs[idx] * waypointDistance;
+
             currentState = EnemyState.ATTACKING;
         }
     }
