@@ -20,6 +20,9 @@ public class EnemyIdleBehavior : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    [SerializeField]
+    bool biasedTowardsPlayer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +54,18 @@ public class EnemyIdleBehavior : MonoBehaviour
     void ToggleWalk()
     {
         isWalking = true;
-        idleWalkDirection = Random.insideUnitCircle.normalized;
+
+        if (biasedTowardsPlayer)
+        {
+            Vector2 vecToPlayer = enemyState.GetVectorToPlayer();
+            Debug.Log(vecToPlayer);
+            float angle = Random.Range(-90f, 90f);
+            idleWalkDirection = Quaternion.Euler(0, 0, angle) * vecToPlayer;
+        }
+        else
+        {
+            idleWalkDirection = Random.insideUnitCircle.normalized;
+        }
         float walkTime = Random.Range(minIdleCooldown, maxIdleCooldown);
 
         Invoke("ToggleStand", walkTime);

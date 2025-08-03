@@ -155,7 +155,7 @@ public class EnemyBehaviour : MonoBehaviour
             Vector2 enemyPushForce = (transform.position - other.transform.position).normalized * force;
 
             rb.AddForce(enemyPushForce, ForceMode2D.Impulse);
-            // GameManager.instance.GetPlayer().Hit(contactDamage, 0.2f, playerPushForce);
+            GameManager.instance.GetPlayer().Hit(contactDamage, 0.2f, playerPushForce);
 
 
             Stun(0.5f);
@@ -224,6 +224,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Vector2 GetVectorToPlayer()
     {
+        if (!GameManager.instance) return Vector2.zero;
         Vector2 playerPos = GameManager.instance.GetPlayer().GetPosition();
         Vector2 enemyPos = new Vector2(transform.position.x, transform.position.y);
         return playerPos - enemyPos;
