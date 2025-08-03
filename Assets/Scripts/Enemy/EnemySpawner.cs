@@ -43,6 +43,11 @@ public class EnemySpawner : MonoBehaviour
 
         // First spawn delay
         ResetSpawnTimer();
+
+        for (int i = 0; i < initialEnemyCount; i++)
+        {
+            SpawnEnemy();
+        }
     }
 
     void Update()
@@ -110,6 +115,7 @@ public class EnemySpawner : MonoBehaviour
     // Standard weighted-random index picker
     private int PickWeightedIndex()
     {
+        print("Spawning enemy");
         int point = Random.Range(0, totalWeight);
         for (int i = 0; i < enemyWeights.Count; i++)
         {

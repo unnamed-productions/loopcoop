@@ -41,15 +41,18 @@ public class PlayerMovement : MonoBehaviour
     //components
     private Rigidbody2D body;
     private SpriteRenderer sprite;
+    private SpriteRenderer yarn;
     private Animator animator;
+
 
     PlayerCombat playerState;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        yarn = sprite.transform.Find("Yarn").GetComponent<SpriteRenderer>();
+        animator = transform.Find("Sprite").GetComponent<Animator>();
         playerState = GetComponent<PlayerCombat>();
     }
 
@@ -110,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
         {
             facingRight = movementVector.x > 0;
             sprite.flipX = !facingRight;
+            yarn.flipX = !facingRight;
+            yarn.transform.localPosition =
+                new(Mathf.Abs(yarn.transform.localPosition.x)
+                * (facingRight ? 1 : -1), yarn.transform.localPosition.y,
+                 yarn.transform.localPosition.x);
         }
     }
 
@@ -138,5 +146,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetFloat("speed", Mathf.Abs(body.velocity.magnitude));
+        yarn.transform.Rotate(0f, 0f, 90f * Time.deltaTime * Mathf.Abs(body.velocity.magnitude)) ;
+
     }
 }

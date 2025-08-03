@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6314988294462982335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grass3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +88,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 252123030, guid: d2622948e2367439cad8cf13482bee12, type: 3}
+    - target: {fileID: 5005750614530035359, guid: 5d198f126033a41efa688a589453a4ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005750614530035359, guid: 5d198f126033a41efa688a589453a4ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5005750614530035359, guid: 5d198f126033a41efa688a589453a4ba, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.4

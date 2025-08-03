@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1409484630430547843}
   - component: {fileID: 5005750614530035359}
   - component: {fileID: 7300599893029116066}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: foliage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_Offset: {x: 0.06977081, y: 0.468286}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.50045276, y: 0.10723589}
     oldSize: {x: 2.85, y: 2.25}
     newSize: {x: 1.74, y: 1}
     adaptiveTilingThreshold: 0.5

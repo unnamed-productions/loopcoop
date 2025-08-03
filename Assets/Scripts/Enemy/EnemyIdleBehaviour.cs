@@ -58,7 +58,6 @@ public class EnemyIdleBehavior : MonoBehaviour
         if (biasedTowardsPlayer)
         {
             Vector2 vecToPlayer = enemyState.GetVectorToPlayer();
-            Debug.Log(vecToPlayer);
             float angle = Random.Range(-90f, 90f);
             idleWalkDirection = Quaternion.Euler(0, 0, angle) * vecToPlayer;
         }

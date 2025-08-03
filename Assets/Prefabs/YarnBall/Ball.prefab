@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4917831327791706167}
   - component: {fileID: 6067162515028074517}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Deadsprite (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4434872393675837768}
   - component: {fileID: 448321106216406461}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Deadsprite (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 8273379411466604146}
   - component: {fileID: 323022083270452662}
   - component: {fileID: 4570869110112068818}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,6 +323,7 @@ MonoBehaviour:
   - {fileID: 448321106216406461}
   - {fileID: 2927730641744884521}
   - {fileID: 6067162515028074517}
+  deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
 --- !u!58 &8273379411466604146
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -353,7 +354,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -404,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5193282417752002362}
   - component: {fileID: 2927730641744884521}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Deadsprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8339638563806322040}
   - component: {fileID: 7297359758329250687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Deadsprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2303850021040832028}
   - component: {fileID: 7308840683541890959}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Deadsprite (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

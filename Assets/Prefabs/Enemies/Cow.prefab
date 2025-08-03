@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 870409330144347210}
   - component: {fileID: 4195145167912692531}
   - component: {fileID: 1238449018288400794}
+  - component: {fileID: 7782760175239648105}
   m_Layer: 0
   m_Name: Cow
   m_TagString: Enemy
@@ -95,7 +96,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2d080209072845389baefffe753ca7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     useProximity: 0
+  deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
 --- !u!50 &4195145167912692531
 Rigidbody2D:
   serializedVersion: 4
@@ -228,3 +230,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7782760175239648105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4203037775174607652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be43d084980b4c43b9cc9565d1d764b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camShake: {fileID: 0}
+  cameraShakeDur: 0.25
+  cameraShakeIntensity: 0.001
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 870409330144347210}
+        m_TargetAssemblyTypeName: EnemyBehaviour, Assembly-CSharp
+        m_MethodName: KillMe
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
