@@ -26,6 +26,8 @@ public class Rat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         yarnTrail = player.GetComponent<YarnTrail>();
         rb = GetComponent<Rigidbody2D>();
         enemyState = GetComponent<EnemyBehaviour>();
@@ -49,7 +51,7 @@ public class Rat : MonoBehaviour
                 break;
             case EnemyBehaviour.EnemyState.ATTACKING:
                 if (targetYarnIdx != -1 && !isDigesting) MoveTowardsYarn();
-                else if(!isDigesting) enemyState.currentState = EnemyBehaviour.EnemyState.NEUTRAL;
+                else if (!isDigesting) enemyState.currentState = EnemyBehaviour.EnemyState.NEUTRAL;
                 else rb.velocity = Vector2.zero;
                 break;
             case EnemyBehaviour.EnemyState.STUNNED:
