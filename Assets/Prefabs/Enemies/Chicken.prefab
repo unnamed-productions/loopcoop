@@ -234,13 +234,13 @@ MonoBehaviour:
   waypointDistance: 3
   deadSprite: {fileID: 21300000, guid: e1c06be5e67914a90a0c5741d631b320, type: 3}
   points: 250
+  deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
   dieSound:
     clip: {fileID: 8300000, guid: 55b44a62bf314e841ac15ece1569536b, type: 3}
     volume: 0.8
     pitch: 1
     loop: 1
     useProximity: 0
-  deadEnemyPrefab: {fileID: 7099374755820212020, guid: 3a6d5fae18fd64a64a18209adcbdcc2a, type: 3}
 --- !u!114 &-3816735101032803601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ebb9d69ae144919baaf76caf2e029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleWalkSpeed: 0.4
+  idleWalkSpeed: 2
   enemyState: {fileID: -8454103000983131514}
   biasedTowardsPlayer: 0
 --- !u!95 &6498114896740871008

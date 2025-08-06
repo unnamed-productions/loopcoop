@@ -2255,12 +2255,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMainScene: Health
+  lastScore: 0
   currentGameState: 0
   player: {fileID: 621487727}
   pauseScreen: {fileID: 0}
-  score: 0
   scoreText: {fileID: 965593954}
   multText: {fileID: 1203934440}
+  gameScore: 0
 --- !u!4 &661067853
 Transform:
   m_ObjectHideFlags: 0

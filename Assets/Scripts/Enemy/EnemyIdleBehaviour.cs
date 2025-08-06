@@ -13,7 +13,7 @@ public class EnemyIdleBehavior : MonoBehaviour
     private bool isWalking;
 
     [SerializeField]
-    float idleWalkSpeed = 0.4f;
+    float idleWalkSpeed = 10f;
 
     [SerializeField]
     private EnemyBehaviour enemyState;
@@ -57,7 +57,7 @@ public class EnemyIdleBehavior : MonoBehaviour
 
         if (biasedTowardsPlayer)
         {
-            Vector2 vecToPlayer = enemyState.GetVectorToPlayer();
+            Vector2 vecToPlayer = enemyState.GetVectorToPlayer().normalized;
             float angle = Random.Range(-90f, 90f);
             idleWalkDirection = Quaternion.Euler(0, 0, angle) * vecToPlayer;
         }
