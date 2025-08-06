@@ -94,7 +94,7 @@ public class Rat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name.StartsWith("YarnSegment") && !isDigesting)
+        if (other.gameObject.name.StartsWith("YarnDraw") && !isDigesting)
         {
             List<GameObject> yarnSegments = yarnTrail.GetYarnSegments();
             if (targetYarnIdx < yarnSegments.Count && yarnSegments[targetYarnIdx] == other.gameObject)
